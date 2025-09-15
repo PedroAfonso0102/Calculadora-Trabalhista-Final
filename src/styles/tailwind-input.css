@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Camada base pode herdar as variáveis já definidas em assets/css/style.css */

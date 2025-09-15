@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Trabalhista Modular</title>
+
+    <!-- Google Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Compiled Tailwind CSS -->
+    <link rel="stylesheet" href="./assets/css/tailwind.css">
+    <!-- Project Custom Styles -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body class="bg-background text-foreground">
+
+    <div id="app" class="flex h-screen w-full">
+        <!-- Sidebar -->
+        <aside id="main-sidebar" class="w-72 flex-col border-r bg-muted/40 hidden sm:flex">
+            <div class="flex h-16 items-center border-b px-6">
+                <a href="/" class="flex items-center gap-2 font-semibold">
+                    <span class="material-icons-outlined text-primary">calculate</span>
+                    <span class="">Calculadora</span>
+                </a>
+            </div>
+            <nav id="sidebar-nav-list" class="flex-1 space-y-1 p-4">
+                <!-- Links da Sidebar serão renderizados aqui pelo JS -->
+                <div class="w-full h-8 rounded-lg bg-gray-200 animate-pulse"></div>
+                <div class="w-full h-8 rounded-lg bg-gray-200 animate-pulse"></div>
+                <div class="w-full h-8 rounded-lg bg-gray-200 animate-pulse"></div>
+            </nav>
+            <div class="mt-auto p-4 border-t">
+                 <button data-action="open-faq" class="w-full justify-start text-left flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary bg-transparent hover:bg-primary/10">
+                    <span class="material-icons-outlined">quiz</span>
+                    Base de Conhecimento
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex flex-col flex-1">
+                        <header class="flex h-16 items-center gap-4 border-b bg-muted/40 px-6 sticky top-0 z-30">
+                <button class="sm:hidden -ml-2 p-2 rounded-md hover:bg-gray-200" data-action="toggle-mobile-sidebar">
+                     <span class="material-icons-outlined">menu</span>
+                </button>
+                <h1 id="main-header-title" class="text-xl font-semibold">Cálculo de Férias</h1>
+                                <div class="ml-auto flex items-center gap-3">
+                                    <label for="select-ano-param" class="text-sm text-muted-foreground">Ano</label>
+                                    <select id="select-ano-param" class="input h-9 py-1 px-2 text-sm">
+                                        <option value="2025" selected>2025</option>
+                                        <option value="2024">2024</option>
+                                    </select>
+                                    <label for="select-theme" class="text-sm text-muted-foreground">Tema</label>
+                                    <select id="select-theme" class="input h-9 py-1 px-2 text-sm">
+                                        <option value="system" selected>Sistema</option>
+                                        <option value="light">Claro</option>
+                                        <option value="dark">Escuro</option>
+                                    </select>
+                                </div>
+                <!-- Header actions can go here -->
+            </header>
+            <main class="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
+                <!-- O container onde os painéis da calculadora serão alternados -->
+                <div id="calculator-panels-container">
+
+                    <!-- Painel de Férias (Exemplo) -->
+                    <div id="calculator-ferias">
+                        <form id="form-ferias" class="max-w-3xl mx-auto space-y-6">
+                            <!-- Seção de Salário -->
+                            <div>
+                                <h3 class="text-lg font-medium">Informações salariais</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="ferias-salarioBruto" class="text-sm font-medium">Salário bruto mensal</label>
+                                        <input type="text" id="ferias-salarioBruto" data-state="ferias.salarioBruto" class="input money-mask" placeholder="R$ 0,00">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="ferias-diasFerias" class="text-sm font-medium">Dias de férias</label>
+                                        <input type="number" id="ferias-diasFerias" data-state="ferias.diasFerias" class="input" value="30">
+                                    </div>
+                                </div>
+                            </div>
+
+                             <!-- Seção de Configurações Adicionais -->
+                            <div>
+                                <h3 class="text-lg font-medium">Opções adicionais</h3>
+                                <div class="mt-4 space-y-4">
+                                     <div class="flex items-center justify-between rounded-lg border p-4">
+                                        <div class="space-y-0.5">
+                                            <label class="text-sm font-medium">Vender 1/3 das férias (abono pecuniário)</label>
+                                             <p class="text-xs text-muted-foreground">Converte 10 dias de férias em pagamento.</p>
+                                        </div>
+                                        <input type="checkbox" data-state="ferias.abonoPecuniario" class="switch">
+                                     </div>
+                                     <div class="flex items-center justify-between rounded-lg border p-4">
+                                        <div class="space-y-0.5">
+                                            <label class="text-sm font-medium">Adiantar 1ª parcela do 13º salário</label>
+                                             <p class="text-xs text-muted-foreground">Receba 50% do seu 13º junto com as férias.</p>
+                                        </div>
+                                        <input type="checkbox" data-state="ferias.adiantarDecimo" class="switch">
+                                     </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- Área de Resultados -->
+                        <div id="ferias-results" class="max-w-3xl mx-auto mt-8">
+                            <!-- Os resultados do cálculo serão inseridos aqui pelo JS -->
+                        </div>
+                    </div>
+
+                    <!-- Placeholders para outras calculadoras -->
+                    <div id="calculator-rescisao" class="hidden">
+                        <form id="form-rescisao" class="max-w-4xl mx-auto space-y-8">
+                            <div>
+                                <h3 class="text-lg font-medium">Dados do contrato</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-salarioBruto">Salário bruto</label>
+                                        <input type="text" id="resc-salarioBruto" data-state="rescisao.salarioBruto" class="input money-mask" placeholder="R$ 0,00" />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-dataAdmissao">Data de admissão</label>
+                                        <input type="date" id="resc-dataAdmissao" data-state="rescisao.dataAdmissao" class="input" />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-dataDemissao">Data de demissão</label>
+                                        <input type="date" id="resc-dataDemissao" data-state="rescisao.dataDemissao" class="input" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium">Motivo e FGTS</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="space-y-1 md:col-span-2">
+                                        <label class="text-sm font-medium" for="resc-motivo">Motivo</label>
+                                        <select id="resc-motivo" data-state="rescisao.motivo" class="input">
+                                            <option value="sem_justa_causa">Sem justa causa</option>
+                                            <option value="pedido_demissao">Pedido de demissão</option>
+                                            <option value="justa_causa">Justa causa</option>
+                                            <option value="acordo_mutuo">Acordo mútuo</option>
+                                        </select>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-saldoFgts">Saldo de FGTS</label>
+                                        <input type="text" id="resc-saldoFgts" data-state="rescisao.saldoFgts" class="input money-mask" placeholder="R$ 0,00" />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-avisoPrevio">Aviso prévio</label>
+                                        <select id="resc-avisoPrevio" data-state="rescisao.avisoPrevio" class="input">
+                                            <option value="indenizado">Indenizado</option>
+                                            <option value="trabalhado">Trabalhado</option>
+                                            <option value="nao_cumprido">Não cumprido</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium">Médias e situações</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-mediaHorasExtras">Média horas extras</label>
+                                        <input type="text" id="resc-mediaHorasExtras" data-state="rescisao.mediaHorasExtras" class="input money-mask" placeholder="R$ 0,00" />
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-mediaAdicionalNoturno">Média adicional noturno</label>
+                                        <input type="text" id="resc-mediaAdicionalNoturno" data-state="rescisao.mediaAdicionalNoturno" class="input money-mask" placeholder="R$ 0,00" />
+                                    </div>
+                                    <div class="flex items-center gap-2 mt-6">
+                                        <input type="checkbox" id="resc-feriasVencidas" data-state="rescisao.feriasVencidas" class="switch" />
+                                        <label for="resc-feriasVencidas" class="text-sm">Férias vencidas</label>
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label class="text-sm font-medium" for="resc-dependentes">Dependentes para IRRF</label>
+                                        <input type="number" id="resc-dependentes" data-state="rescisao.dependentes" class="input" value="0" min="0" />
+                                    </div>
+                                </div>
+                                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" id="resc-projetarAviso" data-state="rescisao.projetarAvisoParaAvos" class="switch" />
+                                        <label for="resc-projetarAviso" class="text-sm">Projetar aviso para avos</label>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" id="resc-excluirFeriasVencidasMulta" data-state="rescisao.excluirFeriasVencidasMulta" class="switch" />
+                                        <label for="resc-excluirFeriasVencidasMulta" class="text-sm">Excluir férias vencidas da multa</label>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <input type="checkbox" id="resc-aplicarReducaoAviso" data-state="rescisao.aplicarReducaoAviso" class="switch" checked />
+                                        <label for="resc-aplicarReducaoAviso" class="text-sm">Redução 7 dias aviso trabalhado</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="rescisao-results" class="max-w-4xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-decimoTerceiro" class="hidden">
+                        <form id="form-decimoTerceiro" class="max-w-3xl mx-auto space-y-6">
+                            <div>
+                                <h3 class="text-lg font-medium">Informações do 13º</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="dt-salarioBruto" class="text-sm font-medium">Salário bruto mensal</label>
+                                        <input type="text" id="dt-salarioBruto" data-state="decimoTerceiro.salarioBruto" class="input money-mask" placeholder="R$ 0,00">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="dt-mesesTrabalhados" class="text-sm font-medium">Meses trabalhados no ano</label>
+                                        <input type="number" id="dt-mesesTrabalhados" data-state="decimoTerceiro.mesesTrabalhados" class="input" value="12" min="0" max="12">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium">Médias e adiantamento</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="dt-mediaHorasExtras" class="text-sm font-medium">Média horas extras</label>
+                                        <input type="text" id="dt-mediaHorasExtras" data-state="decimoTerceiro.mediaHorasExtras" class="input money-mask" placeholder="R$ 0,00">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="dt-mediaAdicionalNoturno" class="text-sm font-medium">Média adicional noturno</label>
+                                        <input type="text" id="dt-mediaAdicionalNoturno" data-state="decimoTerceiro.mediaAdicionalNoturno" class="input money-mask" placeholder="R$ 0,00">
+                                    </div>
+                                    <div class="space-y-1">
+                                        <label for="dt-adiantamentoRecebido" class="text-sm font-medium">Adiantamento (1ª parcela)</label>
+                                        <input type="text" id="dt-adiantamentoRecebido" data-state="decimoTerceiro.adiantamentoRecebido" class="input money-mask" placeholder="R$ 0,00">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-medium">Dependentes</h3>
+                                <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div class="space-y-1">
+                                        <label for="dt-dependentes" class="text-sm font-medium">Dependentes para IRRF</label>
+                                        <input type="number" id="dt-dependentes" data-state="decimoTerceiro.dependentes" class="input" value="0" min="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="decimoTerceiro-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-salarioLiquido" class="hidden"></div>
+                    <div id="calculator-fgts" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">FGTS Anual</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Salário bruto</label>
+                                    <input type="text" class="input money-mask" data-state="fgts.salarioBruto" placeholder="R$ 0,00" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Meses trabalhados</label>
+                                    <input type="number" class="input" data-state="fgts.mesesTrabalhadosAno" value="12" min="0" max="12" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Distrib. lucros (ano)</label>
+                                    <input type="text" class="input money-mask" data-state="fgts.distribuicaoLucros" placeholder="R$ 0,00" />
+                                </div>
+                            </div>
+                        </form>
+                        <div id="fgts-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-pisPasep" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">PIS/PASEP</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Salário Médio</label>
+                                    <input type="text" class="input money-mask" data-state="pisPasep.salarioMensalMedio" placeholder="R$ 0,00" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Meses trabalhados</label>
+                                    <input type="number" class="input" data-state="pisPasep.mesesTrabalhadosAno" value="12" min="0" max="12" />
+                                </div>
+                            </div>
+                        </form>
+                        <div id="pisPasep-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-seguroDesemprego" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">Seguro-Desemprego</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Mês salário 1</label>
+                                    <input type="text" class="input money-mask" data-state="seguroDesemprego.salarioBruto" placeholder="R$ 0,00" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Média 3 meses</label>
+                                    <input type="text" class="input money-mask" data-state="seguroDesemprego.mediaSalariosUltimos3" placeholder="R$ 0,00" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Meses (36)</label>
+                                    <input type="number" class="input" data-state="seguroDesemprego.mesesTrabalhadosUltimos36" min="0" max="36" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Solicitações</label>
+                                    <input type="number" class="input" data-state="seguroDesemprego.numeroSolicitacoes" min="1" max="5" value="1" />
+                                </div>
+                            </div>
+                        </form>
+                        <div id="seguroDesemprego-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-horasExtras" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">Horas Extras</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Salário</label>
+                                    <input type="text" class="input money-mask" data-state="horasExtras.salarioBruto" placeholder="R$ 0,00" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Horas Extras</label>
+                                    <input type="number" class="input" data-state="horasExtras.horasExtras" min="0" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Adicional (%)</label>
+                                    <input type="number" class="input" data-state="horasExtras.percentualAdicional" value="50" min="0" />
+                                </div>
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Carga (mês)</label>
+                                    <input type="number" class="input" data-state="horasExtras.cargaHorariaMensal" value="220" min="1" />
+                                </div>
+                            </div>
+                        </form>
+                        <div id="horasExtras-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-inss" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">INSS</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                                <div class="space-y-1">
+                                    <label class="text-sm font-medium">Salário</label>
+                                    <input type="text" class="input money-mask" data-state="inss.salarioBruto" placeholder="R$ 0,00" />
+                                </div>
+                            </div>
+                        </form>
+                        <div id="inss-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-valeTransporte" class="hidden">
+                        <form class="max-w-3xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">Vale-Transporte</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mt-4">
+                                <div class="space-y-1"><label class="text-sm font-medium">Salário</label><input type="text" class="input money-mask" data-state="valeTransporte.salarioBruto" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Custo Diário</label><input type="text" class="input money-mask" data-state="valeTransporte.custoDiarioTransporte" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Dias/Mês</label><input type="number" class="input" data-state="valeTransporte.diasTrabalhoMes" value="22" min="0" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">% Desconto</label><input type="number" class="input" data-state="valeTransporte.percentualDescontoEmpregado" value="6" min="0" max="6" /></div>
+                            </div>
+                        </form>
+                        <div id="valeTransporte-results" class="max-w-3xl mx-auto mt-8"></div>
+                    </div>
+                    <div id="calculator-irpf" class="hidden">
+                        <form class="max-w-4xl mx-auto space-y-6">
+                            <h3 class="text-lg font-medium">IRPF Anual</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-4">
+                                <div class="space-y-1"><label class="text-sm font-medium">Salário Mensal</label><input type="text" class="input money-mask" data-state="irpf.salarioBruto" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Dependentes</label><input type="number" class="input" data-state="irpf.dependentes" min="0" value="0" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Outras Deduções</label><input type="text" class="input money-mask" data-state="irpf.outrasDeducoes" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Pensão Alimentícia</label><input type="text" class="input money-mask" data-state="irpf.pensaoAlimenticia" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Prev. Oficial</label><input type="text" class="input money-mask" data-state="irpf.contribuicaoPrevidenciaOficial" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Prev. Privada</label><input type="text" class="input money-mask" data-state="irpf.contribuicaoPrevidenciaPrivada" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Rend. 13º</label><input type="text" class="input money-mask" data-state="irpf.rendimento13" placeholder="R$ 0,00" /></div>
+                                <div class="space-y-1"><label class="text-sm font-medium">Rend. Férias</label><input type="text" class="input money-mask" data-state="irpf.rendimentoFerias" placeholder="R$ 0,00" /></div>
+                            </div>
+                        </form>
+                        <div id="irpf-results" class="max-w-4xl mx-auto mt-8"></div>
+                    </div>
+                    <!-- ... e assim por diante para todas as outras -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Script principal da aplicação -->
+    <script type="module" src="./src/app/main.js?v=2"></script>
+</body>
+</html>
