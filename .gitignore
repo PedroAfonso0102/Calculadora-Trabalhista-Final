@@ -1,0 +1,43 @@
+# Node dependencies
+node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Build outputs / caches
+dist/
+build/
+out/
+.tmp/
+.temp/
+.cache/
+.parcel-cache/
+coverage/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.eslintcache
+.stylelintcache
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Temporary/local
+/tmp
+*.local
+
+# Package archives
+*.tgz

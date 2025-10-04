@@ -1,0 +1,18 @@
+{
+  "articles": [
+    {
+      "title": "Cálculo de Férias com Abono Pecuniário",
+      "date": "2025-08-20",
+      "author": "Plataforma Trabalhista",
+      "summary": "Análise do cálculo de férias com a inclusão do abono pecuniário (venda de 1/3), detalhando as incidências de INSS, IRRF e o impacto no FGTS.",
+      "url": "https://example.com/artigos/calculo-ferias-abono"
+    },
+    {
+      "title": "O 13º Salário: Cálculo de Parcelas, Médias e Descontos",
+      "date": "2025-07-10",
+      "author": "Plataforma Trabalhista",
+      "summary": "Detalhamento das regras de cálculo do 13º salário, incluindo a apuração de médias de variáveis e a composição dos descontos na segunda parcela.",
+      "url": "https://example.com/artigos/guia-decimo-terceiro"
+    }
+  ]
+}

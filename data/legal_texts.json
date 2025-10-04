@@ -1,0 +1,328 @@
+{
+  "fgts": {
+    "title": "FGTS - Fundo de Garantia do Tempo de Serviço",
+    "description": "Análise do Fundo de Garantia do Tempo de Serviço (FGTS), incluindo sua definição, o sistema de depósitos mensais e as modalidades de saque.",
+    "topics": {
+      "o_que_e_fgts": {
+        "title": "Definição de FGTS",
+        "content": "<p>O Fundo de Garantia do Tempo de Serviço (FGTS) é uma reserva financeira compulsória, constituída por depósitos mensais que o empregador realiza em nome do empregado. O objetivo primário é proteger o trabalhador em caso de demissão sem justa causa, mas os fundos podem ser utilizados em outras circunstâncias, como para a aquisição de moradia própria.</p><p class='mt-2'>O valor depositado <strong>não é deduzido do salário</strong>, constituindo uma obrigação exclusiva do empregador.</p>",
+        "legal": "Base legal: Lei nº 8.036/90",
+        "example": "Atua como uma garantia financeira para o trabalhador, provendo recursos para transições de carreira ou para a realização de projetos patrimoniais."
+      },
+      "deposito_mensal": {
+        "title": "Depósito Mensal",
+        "content": "<p>O empregador tem a obrigação de depositar, até o dia 20 de cada mês (conforme as regras do FGTS Digital), o valor equivalente a <strong>8% da remuneração bruta</strong> do empregado em uma conta vinculada na Caixa Econômica Federal. Para contratos de aprendizagem, o percentual é de 2%.</p>",
+        "legal": "Base legal: Art. 15 da Lei nº 8.036/90",
+        "example": "Para uma remuneração bruta de R$ 3.500,00, o depósito mensal obrigatório do FGTS, a ser realizado pela empresa, corresponde a R$ 280,00."
+      },
+      "saque_rescisao": {
+        "title": "Modalidade Saque-Rescisão",
+        "content": "<p>Esta é a modalidade padrão do FGTS. Em caso de demissão <strong>sem justa causa</strong>, o trabalhador adquire o direito de sacar o <strong>saldo integral</strong> de sua conta. Adicionalmente, o empregador deve pagar uma multa rescisória de 40% sobre o montante de todos os depósitos efetuados durante a vigência do contrato.</p>",
+        "legal": "Base legal: Art. 18 e Art. 20, I da Lei nº 8.036/90",
+        "example": "Um trabalhador demitido sem justa causa, com um saldo de R$ 15.000,00 em sua conta do FGTS, poderá realizar o saque deste valor total."
+      },
+      "multa_40": {
+        "title": "Multa Rescisória de 40%",
+        "content": "<p>A multa de 40% é uma indenização devida pelo empregador no ato da demissão sem justa causa. Sua base de cálculo é o <strong>valor total dos depósitos</strong> realizados na conta do FGTS ao longo do contrato, com a devida atualização monetária, e não apenas o saldo final. O valor da multa é depositado na conta do FGTS e sacado juntamente com o saldo principal.</p>",
+        "legal": "Base legal: Art. 18, § 1º da Lei nº 8.036/90",
+        "example": "Se o total de depósitos durante o contrato foi de R$ 20.000,00, a multa rescisória a ser paga pelo empregador será de R$ 8.000,00."
+      },
+      "saque_aniversario": {
+        "title": "Modalidade Saque-Aniversário",
+        "content": "<p>Trata-se de uma modalidade <strong>opcional</strong> que permite ao trabalhador a retirada anual de parte do saldo de sua conta do FGTS, no mês de seu aniversário. A adesão a este sistema, no entanto, implica a <strong>perda do direito ao saque integral</strong> do saldo em caso de demissão sem justa causa, sendo mantido apenas o direito à multa de 40%.</p>",
+        "legal": "Base legal: Lei nº 13.932/2019",
+        "example": "Um trabalhador que adere ao saque-aniversário e é subsequentemente demitido sem justa causa poderá sacar apenas o valor da multa de 40%, mas não o saldo remanescente na conta."
+      }
+    }
+  },
+  "pisPasep": {
+    "title": "Abono Salarial (PIS/PASEP)",
+    "description": "O Abono Salarial é um benefício anual, com valor máximo de um salário mínimo, destinado a trabalhadores que atendem a critérios específicos estabelecidos em lei. A elegibilidade requer o cumprimento cumulativo de todos os requisitos.",
+    "fundamentacao_legal": "<p>Regido pela Lei nº 7.998/90, o direito ao abono salarial está condicionado ao atendimento de <strong>cinco requisitos</strong>:</p><p>1. Possuir cadastro no PIS/PASEP há, no mínimo, <strong>cinco anos</strong>.</p><p>2. Ter recebido remuneração média de até <strong>dois salários mínimos</strong> durante o ano-base.</p><p>3. Ter exercido atividade remunerada para Pessoa Jurídica por, no mínimo, <strong>30 dias</strong> (consecutivos ou não) no ano-base.</p><p>4. Ter os dados informados corretamente pelo empregador na Relação Anual de Informações Sociais (RAIS) ou no eSocial.</p><p class='mt-2'>O valor do abono é <strong>proporcional</strong> ao número de meses trabalhados no ano-base, sendo cada mês equivalente a 1/12 do salário mínimo vigente na data do pagamento.</p>",
+    "constants": {
+      "SALARIO_MINIMO_VIGENTE": 1518.00,
+      "MAX_MULTIPLIER_SALARIO": 2,
+      "MIN_ANOS_INSCRICAO": 5
+    },
+    "examples": [
+      {
+        "description": "Exemplo de cálculo para trabalhador elegível com 10 meses de trabalho no ano-base.",
+        "inputs": {
+          "salario_medio_anobase": 1500.00,
+          "meses_trabalhados_anobase": 10,
+          "ano_inscricao": 2018
+        },
+        "expected_output": {
+          "valor_abono": 1176.67,
+          "elegivel": true
+        }
+      }
+    ]
+  },
+  "seguroDesemprego": {
+    "title": "Seguro-Desemprego",
+    "description": "Benefício destinado a prover assistência financeira temporária ao trabalhador dispensado de forma involuntária (sem justa causa).",
+    "fundamentacao_legal": "<p>Regulamentado pela Lei nº 7.998/90 e por resoluções do CODEFAT, o Seguro-Desemprego é um componente da seguridade social. Para ser elegível, o trabalhador deve ter sido dispensado sem justa causa, não dispor de renda própria para seu sustento e não receber benefício previdenciário de prestação continuada (com exceção de pensão por morte ou auxílio-acidente).</p><p class='mt-2'>A quantidade de parcelas e o período de carência variam conforme o número de solicitações anteriores do benefício:</p><p><strong>1ª Solicitação:</strong> Exige trabalho por, no mínimo, 12 meses nos últimos 18 meses.</p><p><strong>2ª Solicitação:</strong> Exige trabalho por, no mínimo, 9 meses nos últimos 12 meses.</p><p><strong>A partir da 3ª Solicitação:</strong> Exige trabalho nos 6 meses imediatamente anteriores.</p><p class='mt-2'>O valor do benefício é calculado com base na média dos salários dos 3 meses anteriores à dispensa, de acordo com faixas de valores definidas pelo governo.</p>",
+    "constants": {
+      "SALARIO_MINIMO_VIGENTE": 1518.00,
+      "TETO_SEGURO_DESEMPREGO": 2309.13
+    },
+    "tables": {
+      "valores_parcelas": [
+        { "faixa": { "min": 0, "max": 2041.39 }, "percentual": 0.80, "parcela_deduzir": 0 },
+        { "faixa": { "min": 2041.40, "max": 3402.65 }, "percentual": 0.50, "parcela_deduzir": 1633.11 },
+        { "faixa": { "min": 3402.66, "max": 99999999 }, "percentual": 0, "parcela_deduzir": 0, "teto_aplicado": true }
+      ],
+      "numero_parcelas": [
+        { "solicitacao": 1, "meses_trabalhados": { "min": 12, "max": 23 }, "parcelas": 4 },
+        { "solicitacao": 1, "meses_trabalhados": { "min": 24, "max": 99999999 }, "parcelas": 5 },
+        { "solicitacao": 2, "meses_trabalhados": { "min": 9, "max": 23 }, "parcelas": 3 },
+        { "solicitacao": 2, "meses_trabalhados": { "min": 24, "max": 99999999 }, "parcelas": 4 },
+        { "solicitacao": 3, "meses_trabalhados": { "min": 6, "max": 11 }, "parcelas": 3 },
+        { "solicitacao": 3, "meses_trabalhados": { "min": 12, "max": 23 }, "parcelas": 4 },
+        { "solicitacao": 3, "meses_trabalhados": { "min": 24, "max": 99999999 }, "parcelas": 5 }
+      ]
+    }
+  },
+  "horasExtras": {
+    "title": "Cálculo de Horas Extras",
+    "description": "Detalhamento do sistema de cálculo para horas trabalhadas além da jornada contratual, incluindo adicionais e reflexos legais.",
+    "fundamentacao_legal": "<p>A Constituição Federal (Art. 7º, XVI) e a CLT (Art. 59) asseguram uma remuneração superior para o serviço extraordinário. O cálculo baseia-se no valor da hora normal de trabalho, acrescido de um adicional.</p><p><strong>Adicionais Mínimos Legais:</strong></p><p>• <strong>50%</strong> para horas extras prestadas de segunda-feira a sábado.</p><p>• <strong>100%</strong> para horas extras prestadas em domingos e feriados.</p><p class='mt-2'><strong>Reflexo no Descanso Semanal Remunerado (DSR):</strong> As horas extras prestadas com habitualidade integram o salário para todos os efeitos legais, gerando reflexos no cálculo do DSR, férias, 13º salário, aviso prévio e FGTS. A interpretação consolidada pelo TST (Súmula nº 172) estabelece que o valor das horas extras habituais deve ser computado no cálculo do DSR.</p>",
+    "constants": {
+      "PERCENTUAL_HE_50": 0.5,
+      "PERCENTUAL_HE_100": 1,
+      "PERCENTUAL_ADICIONAL_NOTURNO": 0.2,
+      "HORAS_MENSAIS_PADRAO": 220
+    },
+    "examples": []
+  },
+  "inss": {
+    "title": "Contribuição Previdenciária (INSS)",
+    "description": "Desconto mensal obrigatório que assegura ao trabalhador o direito a benefícios da Previdência Social, como aposentadoria e auxílios.",
+    "fundamentacao_legal": "<p>Prevista na Lei nº 8.212/91, a contribuição ao INSS é essencial para o custeio do sistema previdenciário. O cálculo é realizado de forma <strong>progressiva</strong>, com alíquotas aplicadas sobre faixas do salário de contribuição, em vez de uma alíquota única sobre o valor total.</p><p class='mt-2'>Este método implica que o salário é dividido em 'fatias', e cada uma delas é tributada com a alíquota correspondente. As faixas e alíquotas são atualizadas anualmente. Existe um teto de contribuição, limitando o desconto para salários que ultrapassam esse valor.</p>",
+    "constants": {
+      "TETO_CONTRIBUICAO_INSS_VALOR_REAL": 908.85
+    },
+    "tables": {
+      "aliquotas_progressivas": [
+        { "faixa": { "min": 0, "max": 1518.00 }, "aliquota": 0.075, "parcela_deduzir": 0 },
+        { "faixa": { "min": 1518.01, "max": 2793.88 }, "aliquota": 0.09, "parcela_deduzir": 22.77 },
+        { "faixa": { "min": 2793.89, "max": 4190.83 }, "aliquota": 0.12, "parcela_deduzir": 106.54 },
+        { "faixa": { "min": 4190.84, "max": 8157.41 }, "aliquota": 0.14, "parcela_deduzir": 190.16 }
+      ]
+    }
+  },
+  "valeTransporte": {
+    "title": "Cálculo do Vale-Transporte",
+    "description": "Regras de custeio do benefício de transporte e o funcionamento do desconto salarial correspondente.",
+    "fundamentacao_legal": "<p>Instituído pela Lei nº 7.418/85, o Vale-Transporte obriga o empregador a antecipar os valores necessários para o deslocamento residência-trabalho do empregado. A lei define um sistema de co-participação.</p><p class='mt-2'>A empresa pode descontar do empregado um valor de até <strong>6% do seu salário base</strong>. O montante que exceder esses 6% é de responsabilidade integral do empregador.</p><p><strong>Regra de Cálculo:</strong> O desconto corresponde sempre ao menor valor entre o custo total do transporte e o limite de 6% do salário. Se o custo do benefício for inferior a 6% do salário, o desconto será limitado a esse custo.</p>",
+    "constants": {
+      "PERCENTUAL_DESCONTO_SALARIO": 0.06,
+      "DIAS_UTEIS_PADRAO": 22
+    }
+  },
+  "irrf": {
+    "title": "Imposto de Renda Retido na Fonte (IRRF)",
+    "description": "Antecipação do Imposto de Renda devido anualmente, com desconto realizado diretamente na folha de pagamento.",
+    "fundamentacao_legal": "<p>Regido pela Lei nº 7.713/88 e pela Receita Federal, o IRRF incide sobre os rendimentos tributáveis do trabalhador. A correta definição da base de cálculo é um ponto central.</p><p><strong>Base de Cálculo:</strong> Salário Bruto (-) Contribuição ao INSS (-) Deduções por Dependentes Legais.</p><p class='mt-2'>Sobre esta base, é aplicada uma tabela de alíquotas <strong>progressivas</strong> (de 0% a 27,5%). Assim como no INSS, o cálculo é feito por faixas, e do imposto apurado, subtrai-se uma 'parcela a deduzir' para obter o valor final a ser retido.</p>"
+  },
+  "irpf": {
+    "title": "Imposto de Renda (IRPF) - Declaração de Ajuste Anual",
+    "fundamentacao_legal": "Cálculo do Imposto de Renda Pessoa Física para a declaração de ajuste anual, com base na Instrução Normativa RFB nº 2174 e na Lei nº 14.848. O cálculo considera a renda tributável anual, as deduções legais (dependentes, saúde, educação) e o imposto já retido na fonte para determinar o imposto a pagar ou a restituir.",
+    "constants": {
+      "DEDUCAO_POR_DEPENDENTE_ANUAL": 2275.08,
+      "LIMITE_DESPESAS_EDUCACAO_ANUAL": 3561.50,
+      "LIMITE_DESCONTO_SIMPLIFICADO_ANUAL": 16754.34
+    },
+    "tables": {
+      "tabela_anual_2025": [
+        { "faixa": { "min": 0, "max": 27110.40 }, "aliquota": 0, "parcela_deduzir": 0 },
+        { "faixa": { "min": 27110.41, "max": 33919.80 }, "aliquota": 0.075, "parcela_deduzir": 2033.28 },
+        { "faixa": { "min": 33919.81, "max": 45012.60 }, "aliquota": 0.15, "parcela_deduzir": 4577.27 },
+        { "faixa": { "min": 45012.61, "max": 55976.16 }, "aliquota": 0.225, "parcela_deduzir": 7953.21 },
+        { "faixa": { "min": 55976.17, "max": 999999999 }, "aliquota": 0.275, "parcela_deduzir": 10752.02 }
+      ]
+    }
+  },
+  "ferias": {
+    "title": "Direito e Cálculo de Férias",
+    "description": "Diretrizes sobre o direito a férias, incluindo o cálculo da remuneração e as diferentes modalidades previstas na legislação.",
+    "topics": {
+      "direito_ferias": {
+        "title": "Direito ao Descanso Anual",
+        "content": "<p>As férias correspondem a um período de <strong>30 dias</strong> de descanso remunerado, um direito adquirido pelo empregado após cada ciclo de 12 meses de trabalho (período aquisitivo).</p><p class='mt-2'>O empregador deve conceder as férias nos 12 meses subsequentes (período concessivo). O descumprimento deste prazo resulta no pagamento em dobro da remuneração de férias.</p>",
+        "legal": "Base legal: Art. 129 e 137 da CLT",
+        "example": "Um funcionário admitido em 01/01/2024 completa seu período aquisitivo em 31/12/2024. A empresa tem até 31/12/2025 para conceder suas férias."
+      },
+      "terco_constitucional": {
+        "title": "Terço Constitucional de Férias",
+        "content": "<p>Corresponde a um valor adicional, assegurado pela Constituição, equivalente a <strong>1/3 da remuneração</strong> do empregado, a ser pago juntamente com o salário de férias. Seu objetivo é prover um recurso financeiro adicional para o período de descanso.</p>",
+        "legal": "Base legal: Art. 7º, XVII da Constituição Federal",
+        "example": "Para um salário de R$ 3.000,00, a remuneração de férias será de R$ 3.000,00 acrescida de R$ 1.000,00 (1/3), totalizando R$ 4.000,00 brutos."
+      },
+      "abono_pecuniario": {
+        "title": "Abono Pecuniário (Venda de Férias)",
+        "content": "<p>O abono pecuniário é a opção de converter até <strong>1/3 dos dias de férias</strong> em dinheiro. Trata-se de uma faculdade do empregado, que pode escolher vender até 10 dias de seu descanso. O empregador não pode se opor a essa decisão.</p>",
+        "legal": "Base legal: Art. 143 da CLT",
+        "example": "Um empregado com direito a 30 dias de férias pode optar por usufruir de 20 dias de descanso e receber o pagamento correspondente aos 10 dias restantes como abono."
+      },
+      "ferias_vencidas": {
+        "title": "Férias Vencidas (Pagamento em Dobro)",
+        "content": "<p>As férias são consideradas vencidas quando o empregador não as concede no prazo legal (período concessivo). Nesta situação, a legislação impõe o pagamento das férias <strong>em dobro</strong> como penalidade.</p>",
+        "legal": "Base legal: Art. 137 da CLT",
+        "example": "Se o período para a concessão das férias de um empregado terminou em março e a empresa não as concedeu, elas são classificadas como vencidas e seu pagamento deverá ser em dobro."
+      }
+    }
+  },
+  "decimo-terceiro": {
+    "title": "13º Salário (Gratificação Natalina)",
+    "description": "Informações sobre o cálculo e o pagamento da gratificação natalina, conhecida como 13º salário.",
+    "topics": {
+      "direito_decimo": {
+        "title": "Direito ao 13º Salário",
+        "content": "<p>A gratificação natalina, ou 13º salário, corresponde a <strong>1/12 da remuneração integral</strong> por mês de serviço prestado no ano. O direito a cada fração mensal é adquirido após 15 dias de trabalho no respectivo mês.</p><p class='mt-2'>O pagamento é efetuado, por padrão, em duas parcelas.</p>",
+        "legal": "Base legal: Lei nº 4.090/62",
+        "example": "Com um salário de R$ 3.000,00 e um ano completo de trabalho, o 13º salário será de R$ 3.000,00. Seis meses de trabalho resultariam em R$ 1.500,00."
+      },
+      "parcelas_decimo": {
+        "title": "Pagamento em Parcelas",
+        "content": "<p><strong>1ª Parcela:</strong> Paga entre fevereiro e 30 de novembro, corresponde a 50% do salário bruto, sem a incidência de descontos.</p><p class='mt-2'><strong>2ª Parcela:</strong> Paga até 20 de dezembro, corresponde aos 50% restantes, sobre os quais são deduzidos o INSS e o IRRF, calculados sobre o valor total do 13º salário.</p>",
+        "legal": "Base legal: Lei nº 4.749/65",
+        "example": "Para um 13º de R$ 3.000,00, a 1ª parcela será de R$ 1.500,00. A 2ª será de R$ 1.500,00 menos os descontos totais aplicáveis."
+      },
+      "adiantamento_13": {
+        "title": "Adiantamento da 1ª Parcela",
+        "content": "<p>O empregado pode solicitar o adiantamento da primeira parcela do 13º salário para recebê-la junto com suas férias. A solicitação formal deve ser feita ao empregador no mês de janeiro do ano correspondente.</p>",
+        "legal": "Base legal: Art. 2º da Lei nº 4.749/65",
+        "example": "Ao tirar férias em julho, o empregado pode, se tiver solicitado em janeiro, receber a primeira parcela do 13º junto com a remuneração das férias."
+      }
+    }
+  },
+  "rescisao": {
+    "title": "Rescisão de Contrato de Trabalho",
+    "description": "Direitos e verbas rescisórias aplicáveis a cada modalidade de desligamento contratual.",
+    "topics": {
+      "tipos_rescisao": {
+        "title": "Modalidades de Rescisão e Direitos",
+        "content": "<p><strong>Demissão sem justa causa:</strong> O empregado tem direito a todas as verbas rescisórias, incluindo saldo de salário, aviso prévio, 13º e férias proporcionais, saque do FGTS acrescido da multa de 40% e seguro-desemprego (se os requisitos forem atendidos).</p><p><strong>Pedido de demissão:</strong> O empregado recebe saldo de salário, 13º e férias proporcionais. Não há direito ao saque do FGTS, à multa de 40% ou ao seguro-desemprego.</p><p><strong>Demissão por justa causa:</strong> O empregado perde a maior parte das verbas rescisórias, tendo direito apenas ao saldo de salário e às férias vencidas (se houver), acrescidas do terço constitucional.</p><p><strong>Acordo mútuo:</strong> O empregado recebe metade do aviso prévio (se indenizado) e metade da multa do FGTS (20%), além das demais verbas (saldo, 13º e férias). Permite o saque de 80% do saldo do FGTS, mas não concede direito ao seguro-desemprego.</p>",
+        "legal": "Base legal: Arts. 477 a 486 da CLT",
+        "example": "Na demissão sem justa causa, o conjunto de verbas rescisórias é o mais abrangente para o trabalhador."
+      },
+      "aviso_previo": {
+        "title": "Aviso Prévio",
+        "content": "<p>Corresponde à comunicação antecipada do término do contrato de trabalho. Pode ser <strong>trabalhado</strong>, com o cumprimento do período de atividade, ou <strong>indenizado</strong>, com o pagamento do valor correspondente e desligamento imediato.</p><p class='mt-2'>A duração é de 30 dias, com um acréscimo de 3 dias por ano de serviço na mesma empresa, limitado a um total de 90 dias.</p>",
+        "legal": "Base legal: Art. 487 da CLT e Lei nº 12.506/11",
+        "example": "Um funcionário com 3 anos de empresa tem direito a 30 dias de base mais 9 dias adicionais, totalizando 39 dias de aviso prévio."
+      },
+      "multa_fgts": {
+        "title": "Multa Rescisória do FGTS",
+        "content": "<p>Na demissão sem justa causa, o empregador deve pagar uma multa de <strong>40% sobre o valor total</strong> depositado na conta do FGTS do empregado durante o contrato. Em caso de acordo mútuo, a multa é de <strong>20%</strong>.</p>",
+        "legal": "Base legal: Art. 18 da Lei nº 8.036/90",
+        "example": "Com um saldo total de R$ 10.000,00 depositado no FGTS, a multa em uma demissão sem justa causa será de R$ 4.000,00."
+      },
+      "seguro_desemprego": {
+        "title": "Seguro-Desemprego",
+        "content": "<p>É um benefício financeiro temporário concedido ao trabalhador dispensado sem justa causa. Os requisitos para habilitação e o número de parcelas (de 3 a 5) dependem do tempo de serviço e do histórico de solicitações do benefício.</p>",
+        "legal": "Base legal: Lei nº 7.998/90",
+        "example": "Para a primeira solicitação, é exigido um período mínimo de trabalho de 12 meses nos 18 meses anteriores à data da dispensa."
+      }
+    }
+  },
+  "descontos": {
+    "title": "Descontos em Folha de Pagamento",
+    "description": "Análise dos principais descontos legais que incidem sobre a remuneração do trabalhador.",
+    "topics": {
+      "inss": {
+        "title": "Contribuição ao INSS",
+        "content": "<p>A contribuição ao Instituto Nacional do Seguro Social (INSS) é um desconto obrigatório que garante ao trabalhador o acesso a benefícios previdenciários, como aposentadoria, auxílio-doença e pensão por morte.</p><p class='mt-2'>O cálculo é feito de forma <strong>progressiva</strong>, com alíquotas que variam de 7,5% a 14% aplicadas sobre cada faixa salarial.</p>",
+        "legal": "Base legal: Lei nº 8.212/91",
+        "example": "Para um salário de R$ 3.000,00, o desconto não é calculado por uma alíquota única, mas sim pela soma dos valores apurados em cada faixa de contribuição."
+      },
+      "irrf": {
+        "title": "Imposto de Renda Retido na Fonte (IRRF)",
+        "content": "<p>O IRRF é um imposto federal que incide sobre a renda do trabalhador. Sua base de cálculo é a remuneração bruta menos a contribuição ao INSS e as deduções por dependentes legais.</p><p class='mt-2'>As alíquotas também são <strong>progressivas</strong> (de 7,5% a 27,5%), e cada faixa possui uma parcela a ser deduzida do imposto apurado.</p>",
+        "legal": "Base legal: Lei nº 7.713/88",
+        "example": "Uma remuneração com base de cálculo de R$ 2.500,00 (após dedução do INSS) se enquadra em uma alíquota específica, da qual se subtrai uma parcela a deduzir para encontrar o imposto devido."
+      },
+      "desconto_vt": {
+        "title": "Desconto de Vale-Transporte",
+        "content": "<p>A legislação autoriza que a empresa desconte até <strong>6% do salário base</strong> do empregado para o custeio do vale-transporte. Se o valor total do benefício for inferior a este percentual, o desconto será limitado ao custo real do transporte.</p>",
+        "legal": "Base legal: Lei nº 7.418/85",
+        "example": "Salário base de R$ 3.000,00 (limite de 6% = R$ 180,00). Se o custo do VT for de R$ 250,00, o desconto será de R$ 180,00. Se o custo for de R$ 150,00, o desconto será de R$ 150,00."
+      },
+      "outros_descontos": {
+        "title": "Outros Descontos Permitidos",
+        "content": "<p>Outros descontos podem ser aplicados, desde que haja autorização prévia do empregado ou previsão em acordo coletivo:</p><p><strong>Benefícios (VR, VA, Plano de Saúde):</strong> Conforme as regras de cada benefício e a legislação (PAT), com limites percentuais.</p><p><strong>Adiantamentos Salariais:</strong> Devolução de valores que foram antecipados pela empresa.</p><p><strong>Contribuição Sindical:</strong> Apenas mediante autorização expressa e prévia do empregado.</p>",
+        "legal": "Base legal: Art. 462 e 579 da CLT",
+        "example": "Um desconto de plano de saúde só pode ser efetuado se houver previsão contratual e autorização do funcionário."
+      }
+    }
+  },
+  "adicionais": {
+    "title": "Adicionais Salariais",
+    "description": "Análise dos adicionais que remuneram condições especiais de trabalho.",
+    "topics": {
+      "periculosidade": {
+        "title": "Adicional de Periculosidade",
+        "content": "<p>É um acréscimo de <strong>30% sobre o salário base</strong> (sem considerar outras verbas) devido a trabalhadores expostos a riscos acentuados, como contato com inflamáveis, explosivos, energia elétrica ou roubos.</p><p class='mt-2'>Este adicional não pode ser acumulado com o de insalubridade; o empregado deve optar pelo que lhe for mais vantajoso financeiramente.</p>",
+        "legal": "Base legal: Art. 193 da CLT",
+        "example": "Para um salário base de R$ 3.000,00, o adicional de periculosidade corresponde a R$ 900,00."
+      },
+      "insalubridade": {
+        "title": "Adicional de Insalubridade",
+        "content": "<p>Compensação financeira para trabalhadores expostos a agentes nocivos à saúde acima dos limites de tolerância. Os percentuais incidem, por regra, sobre o salário mínimo e variam com o grau de risco:</p><p><strong>Mínimo:</strong> 10% | <strong>Médio:</strong> 20% | <strong>Máximo:</strong> 40%</p><p class='mt-2'>Este adicional não é acumulável com o de periculosidade.</p>",
+        "legal": "Base legal: Art. 192 da CLT",
+        "example": "Para uma atividade de grau máximo (40%), o adicional calculado sobre o salário mínimo de R$ 1.412,00 seria de R$ 564,80."
+      },
+      "adicional_noturno": {
+        "title": "Adicional Noturno",
+        "content": "<p>Para o trabalho urbano executado entre 22h e 5h, a remuneração deve ser acrescida de, no mínimo, <strong>20% sobre o valor da hora diurna</strong>. Adicionalmente, a hora de trabalho noturna é computada como tendo 52 minutos e 30 segundos (hora ficta), o que resulta em um aumento efetivo da remuneração horária.</p>",
+        "legal": "Base legal: Art. 73 da CLT",
+        "example": "Se a hora normal é de R$ 15,00, a hora noturna será de, no mínimo, R$ 18,00, além do ganho de tempo proporcionado pela hora reduzida."
+      },
+      "horas_extras": {
+        "title": "Horas Extras",
+        "content": "<p>Qualquer hora trabalhada que exceda a jornada contratual deve ser remunerada com um adicional. O valor mínimo legal é de <strong>50%</strong> para horas extras em dias úteis e de <strong>100%</strong> para aquelas realizadas em domingos e feriados.</p>",
+        "legal": "Base legal: Art. 59 da CLT e Art. 7º, XVI da CF",
+        "example": "Se o valor da hora normal é R$ 15,00, a hora extra com adicional de 50% será remunerada a R$ 22,50."
+      }
+    }
+  },
+  "beneficios": {
+    "title": "Benefícios Trabalhistas",
+    "description": "Principais benefícios assegurados pela legislação ou por meio de negociação coletiva.",
+    "topics": {
+      "salario_familia": {
+        "title": "Salário-Família",
+        "content": "<p>Benefício previdenciário destinado a empregados de baixa renda, pago na proporção do número de filhos de até 14 anos ou filhos inválidos de qualquer idade. O valor da cota e o teto de renda para elegibilidade são definidos anualmente pelo governo.</p><p class='mt-2'>Para 2024, o valor é de R$ 62,04 por filho para trabalhadores com remuneração mensal de até R$ 1.819,26.</p>",
+        "legal": "Base legal: Art. 65 da Lei nº 8.213/91",
+        "example": "Um trabalhador elegível com dois filhos receberá R$ 124,08 mensais a título de salário-família."
+      },
+      "vale_transporte": {
+        "title": "Vale-Transporte",
+        "content": "<p>Benefício obrigatório que o empregador deve fornecer para cobrir as despesas de deslocamento do empregado entre sua residência e o local de trabalho. A empresa pode descontar até 6% do salário base do funcionário para custear o benefício, sendo responsável pelo valor excedente.</p>",
+        "legal": "Base legal: Lei nº 7.418/85",
+        "example": "Se o custo do transporte é de R$ 200,00 e 6% do salário do empregado correspondem a R$ 150,00, a empresa arcará com a diferença de R$ 50,00."
+      },
+      "vale_refeicao": {
+        "title": "Vale-Refeição/Alimentação",
+        "content": "<p>Este não é um benefício obrigatório por lei, mas é frequentemente concedido por meio de acordos ou convenções coletivas. As regras de custeio e desconto variam, mas comumente seguem as diretrizes do Programa de Alimentação do Trabalhador (PAT).</p>",
+        "legal": "Base legal: Lei nº 6.321/76 e normas coletivas",
+        "example": "Um acordo coletivo pode estipular o valor diário do vale-refeição e o percentual máximo de desconto no salário do empregado."
+      },
+      "fgts_topic": {
+        "title": "FGTS - Fundo de Garantia",
+        "content": "<p>O empregador é obrigado a depositar mensalmente o valor correspondente a <strong>8% da remuneração bruta</strong> do empregado em uma conta vinculada. O FGTS atua como uma poupança compulsória, com saque permitido em situações específicas, como demissão sem justa causa, aposentadoria ou aquisição de imóvel.</p>",
+        "legal": "Base legal: Lei nº 8.036/90",
+        "example": "Para uma remuneração bruta de R$ 3.000,00, o depósito mensal no FGTS será de R$ 240,00."
+      }
+    }
+  },
+  "individual_topics": {
+    "base_insalubridade": {
+      "title": "Base de Cálculo do Adicional de Insalubridade",
+      "content": "<p>A jurisprudência majoritária (Súmula Vinculante nº 4 do STF) e a CLT apontam o <strong>salário mínimo</strong> como a base de cálculo padrão. No entanto, convenções ou acordos coletivos podem estabelecer o <strong>salário base</strong> ou o piso salarial como base de cálculo, condição que, por ser mais benéfica ao trabalhador, deve prevalecer.</p>",
+      "legal": "Base legal: Súmula Vinculante nº 4 do STF e Art. 192 da CLT"
+    }
+  }
+}

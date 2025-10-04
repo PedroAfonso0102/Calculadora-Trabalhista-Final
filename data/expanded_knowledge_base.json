@@ -1,0 +1,744 @@
+{
+  "faq_global": {
+    "title": "Perguntas Frequentes - Plataforma Trabalhista",
+    "description": "Respostas para dúvidas comuns sobre direitos trabalhistas e cálculos previdenciários.",
+    "categories": [
+      {
+        "id": "geral",
+        "title": "Questões Gerais",
+        "icon": "info",
+        "materialIcon": "info",
+        "questions": [
+          {
+            "id": "como_funciona_atualizacao",
+            "question": "Como a base de dados e as regras são mantidas atualizadas?",
+            "answer": "<p>A equipe responsável atualiza periodicamente as tabelas e regras com base nas normas publicadas pelos órgãos oficiais (Ministério do Trabalho, Receita Federal, INSS, etc.). As atualizações podem ser feitas via deploy da aplicação ou por atualizações de dados em arquivos locais. Usuários são informados sobre mudanças relevantes através de notas de versão no próprio aplicativo.</p>",
+            "tags": ["atualização", "dados", "versão"],
+            "related_calculators": ["todas"]
+          },
+          {
+            "id": "como_relatar_erro",
+            "question": "Como posso relatar um erro ou discrepância nos cálculos?",
+            "answer": "<p>Se você encontrar um possível erro, por favor utilize o canal de feedback disponível no aplicativo ou abra uma issue no repositório do projeto com detalhes (passos para reproduzir, valores de entrada e captura de tela). A equipe analisará e, se necessário, fará a correção.</p>",
+            "tags": ["erro", "feedback", "relatar"],
+            "related_calculators": ["todas"]
+          },
+          {
+            "id": "calc_estimativo",
+            "question": "Os cálculos da ferramenta são oficiais?",
+            "answer": "<p>Não. A ferramenta realiza <strong>cálculos estimativos</strong> com base na legislação trabalhista vigente. Os valores apresentados servem como referência e não substituem a consulta a profissionais qualificados, como advogados ou contadores, nem os cálculos oficiais emitidos por órgãos competentes ou sindicatos.</p><p class='mt-2'>Recomenda-se que os resultados sejam validados por um profissional antes da tomada de decisões.</p>",
+            "tags": ["cálculo", "estimativo", "oficial", "responsabilidade"],
+            "related_calculators": ["todas"]
+          },
+          {
+            "id": "dados_salvos",
+            "question": "Os dados inseridos são armazenados?",
+            "answer": "<p>Por padrão, <strong>os dados não são armazenados em servidores externos</strong>. Todas as informações inseridas permanecem no navegador do usuário (via localStorage) e podem ser removidas a qualquer momento pelo próprio usuário.</p><p class='mt-2'>A funcionalidade de salvamento automático, se ativada, também armazena os dados exclusivamente no dispositivo local, garantindo a privacidade das informações.</p>",
+            "tags": ["privacidade", "dados", "localStorage", "segurança"],
+            "related_calculators": ["todas"]
+          },
+          {
+            "id": "precisao_valores",
+            "question": "Por que os valores podem divergir de outras fontes?",
+            "answer": "<p>Diferenças nos resultados podem ocorrer por diversos fatores, entre eles:</p><ul class='mt-2 space-y-1'><li>• <strong>Arredondamento:</strong> Aplicação de diferentes regras de arredondamento.</li><li>• <strong>Vigência de tabelas:</strong> Utilização de tabelas de cálculo desatualizadas em outras fontes.</li><li>• <strong>Interpretação legal:</strong> Convenções coletivas podem ter regras específicas não contempladas no cálculo geral.</li><li>• <strong>Dados de entrada:</strong> Ausência de informações sobre benefícios ou descontos específicos.</li></ul><p class='mt-2'>A ferramenta utiliza as tabelas oficiais mais recentes. Contudo, é prudente confirmar os valores com o departamento pessoal ou um contador.</p>",
+            "tags": ["diferenças", "precisão", "tabelas", "convenção coletiva"],
+            "related_calculators": ["todas"]
+          },
+          {
+            "id": "cct_act",
+            "question": "O que são Convenções e Acordos Coletivos (CCT/ACT)?",
+            "answer": "<p><strong>Convenções Coletivas de Trabalho (CCT)</strong> e <strong>Acordos Coletivos de Trabalho (ACT)</strong> são instrumentos normativos negociados entre sindicatos de trabalhadores e sindicatos de empregadores (CCT) ou diretamente com uma ou mais empresas (ACT).</p><p class='mt-2'>Eles estabelecem condições de trabalho específicas para uma determinada categoria profissional ou empresa, e suas cláusulas têm força de lei para as partes envolvidas.</p><p class='mt-2'><strong>Importância:</strong> Muitas vezes, a CCT ou o ACT garantem direitos superiores aos previstos na CLT, como pisos salariais maiores, adicionais de horas extras com percentuais mais elevados, ou benefícios adicionais. Em alguns casos, o negociado pode prevalecer sobre o legislado, conforme previsto na Reforma Trabalhista. Por isso, é fundamental consultá-los.</p>",
+            "tags": ["cct", "act", "convenção coletiva", "acordo coletivo", "sindicato", "direitos"],
+            "related_calculators": ["todas"]
+          }
+        ]
+      },
+      {
+        "id": "ferias",
+        "title": "Férias",
+        "icon": "beach_access",
+        "materialIcon": "beach_access",
+        "questions": [
+          {
+            "id": "ferias_pagamento_parcial",
+            "question": "Quando as férias podem ser pagas em mais de uma vez?",
+            "answer": "<p>Normalmente as férias são pagas em parcela única, mas existem acordos coletivos ou situações excepcionais onde o pagamento pode ser fracionado, desde que haja previsão em convenção coletiva ou acordo com o trabalhador. É recomendável verificar a CCT/ACT da categoria.</p>",
+            "tags": ["pagamento", "parcelamento", "convencao coletiva"],
+            "related_calculators": ["ferias"]
+          },
+          {
+            "id": "ferias_descontos",
+            "question": "Quais descontos podem incidir sobre o pagamento de férias?",
+            "answer": "<p>Sobre o pagamento de férias incidem descontos legais como INSS e Imposto de Renda, quando aplicáveis. O abono pecuniário também sofre os mesmos descontos na parcela correspondente. Benefícios e descontos contratuais informados na folha devem ser considerados.</p>",
+            "tags": ["descontos", "inss", "irrf"],
+            "related_calculators": ["ferias", "salarioLiquido"]
+          },
+          {
+            "id": "ferias_periodo",
+            "question": "É permitido fracionar o período de férias?",
+            "answer": "<p>Sim, a legislação permite o fracionamento das férias em até <strong>três períodos</strong>, desde que observadas as seguintes condições:</p><ul class='mt-2 space-y-1'><li>• Um dos períodos deve ter, no mínimo, 14 dias corridos.</li><li>• Os demais períodos não podem ser inferiores a 5 dias corridos cada.</li><li>• O início de qualquer um dos períodos não pode ocorrer nos dois dias que antecedem feriado ou dia de repouso semanal remunerado.</li></ul><p class='mt-2'><strong>Exemplo de fracionamento:</strong> Um período de 30 dias pode ser dividido em 14, 10 e 6 dias.</p>",
+            "tags": ["férias divididas", "período", "regras", "CLT"],
+            "related_calculators": ["ferias"]
+          },
+          {
+            "id": "ferias_venda",
+            "question": "É possível vender uma parte das férias?",
+            "answer": "<p>Sim, o trabalhador tem o direito de converter até <strong>1/3 do seu período de férias</strong> em abono pecuniário, o que equivale à venda de 10 dias para quem tem direito a 30 dias de férias.</p><p class='mt-2'><strong>Procedimento de solicitação:</strong></p><ul class='mt-2 space-y-1'><li>• A solicitação deve ser feita por escrito.</li><li>• O prazo para a solicitação é de até 15 dias antes do término do período aquisitivo.</li><li>• O empregador não pode recusar o pedido.</li></ul><p class='mt-2'>O valor do abono corresponde à remuneração dos dias vendidos, acrescido do terço constitucional.</p>",
+            "tags": ["abono pecuniário", "venda férias", "1/3", "solicitação"],
+            "related_calculators": ["ferias"]
+          },
+          {
+            "id": "ferias_demissao",
+            "question": "Quais são os direitos de férias na rescisão?",
+            "answer": "<p>Os direitos sobre as férias na rescisão contratual dependem da modalidade do desligamento.</p><p class='mt-2'><strong>Demissão sem justa causa ou pedido de demissão:</strong></p><ul class='mt-2 space-y-1'><li>• Férias vencidas, acrescidas de 1/3.</li><li>• Férias proporcionais, acrescidas de 1/3, calculadas com base nos meses trabalhados no período aquisitivo incompleto.</li></ul><p class='mt-2'><strong>Demissão por justa causa:</strong></p><ul class='mt-2 space-y-1'><li>• Direito apenas às férias vencidas (se houver), acrescidas de 1/3.</li><li>• Não há direito ao pagamento de férias proporcionais.</li></ul><p class='mt-2'>A calculadora de rescisão detalha estes cálculos.</p>",
+            "tags": ["férias rescisão", "demissão", "justa causa", "proporcionais"],
+            "related_calculators": ["ferias", "rescisao"]
+          }
+        ]
+      },
+      {
+        "id": "decimo_terceiro",
+        "title": "13º Salário",
+        "icon": "card_giftcard",
+        "materialIcon": "card_giftcard",
+        "questions": [
+          {
+            "id": "decimo_descontos_primeira_parcela",
+            "question": "A primeira parcela do 13º sofre descontos?",
+            "answer": "<p>A primeira parcela do 13º não sofre descontos de INSS ou IRRF quando paga separadamente. No entanto, se houver pagamentos compensatórios ou adiantamentos que alterem a base, recomenda-se verificar com o departamento pessoal.</p>",
+            "tags": ["13º", "descontos", "parcela"],
+            "related_calculators": ["decimoTerceiro"]
+          },
+          {
+            "id": "decimo_afastamentos",
+            "question": "Como licenças e afastamentos impactam o 13º salário?",
+            "answer": "<p>Licenças e afastamentos podem impactar a contagem de meses para o 13º. Dependendo da legislação e do tipo de afastamento (licença médica, maternidade, afastamento sem remuneração), pode haver períodos que não contam como tempo de serviço para fins de 13º, reduzindo a proporcionalidade. Consulte o RH para casos específicos.</p>",
+            "tags": ["licença", "afastamento", "proporcional"],
+            "related_calculators": ["decimoTerceiro", "salarioLiquido"]
+          },
+          {
+            "id": "decimo_quando",
+            "question": "Como é definido o direito ao 13º salário?",
+            "answer": "<p>O direito ao 13º salário é adquirido de forma proporcional. Considera-se um mês de serviço para o cálculo quando o empregado trabalha por pelo menos <strong>15 dias</strong> no respectivo mês.</p><p class='mt-2'><strong>Exemplos de cálculo:</strong></p><ul class='mt-2 space-y-1'><li>• Trabalho durante todo o ano: direito ao 13º salário integral.</li><li>• Trabalho por 6 meses: direito a 6/12 do valor do salário.</li><li>• Trabalho por 16 dias em um mês: o mês é contabilizado integralmente.</li><li>• Trabalho por 14 dias em um mês: o mês não é contabilizado.</li></ul><p class='mt-2'><strong>Base de cálculo:</strong> Utiliza-se o salário de dezembro ou a maior remuneração do ano, caso seja variável.</p>",
+            "tags": ["direito 13º", "15 dias", "proporcional", "base cálculo"],
+            "related_calculators": ["decimoTerceiro"]
+          },
+          {
+            "id": "decimo_parcelas",
+            "question": "Como funciona o pagamento em parcelas?",
+            "answer": "<p>O pagamento do 13º salário é efetuado em duas parcelas, com regras distintas:</p><p class='mt-2'><strong>Primeira Parcela (paga entre fevereiro e 30 de novembro):</strong></p><ul class='mt-2 space-y-1'><li>• Corresponde a 50% do valor bruto do salário.</li><li>• Não há incidência de descontos (INSS e IRRF).</li><li>• Pode ser paga juntamente com as férias, se solicitado em janeiro.</li></ul><p class='mt-2'><strong>Segunda Parcela (paga até 20 de dezembro):</strong></p><ul class='mt-2 space-y-1'><li>• Corresponde aos 50% restantes do valor bruto.</li><li>• Sobre o valor total do 13º incidem os descontos de INSS e IRRF, que são deduzidos nesta parcela.</li></ul>",
+            "tags": ["parcelas 13º", "1ª parcela", "2ª parcela", "descontos"],
+            "related_calculators": ["decimoTerceiro"]
+          },
+          {
+            "id": "decimo_demissao",
+            "question": "O 13º salário é devido na rescisão de contrato?",
+            "answer": "<p>Sim, o direito ao 13º salário proporcional é mantido na maioria das modalidades de rescisão de contrato.</p><p class='mt-2'>O pagamento proporcional é devido em casos de <strong>demissão sem justa causa, pedido de demissão, acordo mútuo e até mesmo demissão por justa causa</strong>.</p><p class='mt-2'><strong>Cálculo:</strong> O valor é calculado pela fórmula (meses trabalhados / 12) multiplicado pelo salário de referência. A regra de 15 dias trabalhados para contar como um mês completo permanece válida.</p>",
+            "tags": ["13º demissão", "proporcional", "justa causa", "cálculo"],
+            "related_calculators": ["decimoTerceiro", "rescisao"]
+          },
+          {
+            "id": "decimo_medias_variaveis",
+            "question": "Como as médias de horas extras e comissões entram no cálculo do 13º?",
+            "answer": "<p>Quando o salário do empregado é composto por partes variáveis, como horas extras, comissões ou adicionais, essas verbas devem ser incluídas no cálculo do 13º salário através de uma média.</p><p class='mt-2'><strong>Regra geral para o cálculo da média:</strong></p><ul class='mt-2 space-y-1'><li>• Soma-se o valor de todas as verbas variáveis recebidas durante o ano (de janeiro a dezembro).</li><li>• O resultado é dividido por 12 (ou pelo número de meses trabalhados no ano).</li><li>• O valor da média é somado ao salário fixo para compor a base de cálculo do 13º salário.</li></ul><p class='mt-2'>Para a primeira parcela, geralmente se apura a média dos meses trabalhados até outubro. A diferença é ajustada no pagamento da segunda parcela em dezembro.</p>",
+            "tags": ["média", "variável", "horas extras", "comissões", "cálculo 13º", "base de cálculo"],
+            "related_calculators": ["decimoTerceiro"]
+          }
+        ]
+      },
+      {
+        "id": "rescisao",
+        "title": "Rescisão de Contrato",
+        "icon": "description",
+        "materialIcon": "description",
+        "questions": [
+          {
+            "id": "rescisao_documentos_entregues",
+            "question": "Quais documentos o empregado deve receber na rescisão?",
+            "answer": "<p>Ao término do contrato, o empregado deve receber o Termo de Rescisão de Contrato de Trabalho (TRCT), guias para saque do FGTS quando aplicável, comprovantes de pagamento das verbas rescisórias e o comprovante de recolhimento do FGTS. É importante conferir todos os valores e recibos no ato do pagamento.</p>",
+            "tags": ["documentos", "TRCT", "comprovantes"],
+            "related_calculators": ["rescisao"]
+          },
+          {
+            "id": "rescisao_calculo_verificacao",
+            "question": "Como verificar se o cálculo rescisório está correto?",
+            "answer": "<p>Verifique se foram considerados corretamente: saldo de salário, aviso prévio, 13º proporcional, férias vencidas e proporcionais com 1/3, multa do FGTS (quando aplicável) e demais verbas negociadas. Compare os valores do recibo com os cálculos detalhados e, em caso de dúvida, consulte um contador ou advogado trabalhista.</p>",
+            "tags": ["verificação", "cálculo", "recibo"],
+            "related_calculators": ["rescisao"]
+          },
+          {
+            "id": "rescisao_tipos",
+            "question": "Quais são os direitos em cada tipo de rescisão?",
+            "answer": "<p>Os direitos rescisórios variam conforme a modalidade de desligamento:</p><p class='mt-2'><strong>Demissão sem justa causa:</strong></p><ul class='mt-2 space-y-1'><li>• Saldo de salário e aviso prévio (trabalhado ou indenizado).</li><li>• 13º salário e férias proporcionais + 1/3.</li><li>• Saque do FGTS acrescido de multa de 40% e direito ao seguro-desemprego.</li></ul><p class='mt-2'><strong>Pedido de demissão:</strong></p><ul class='mt-2 space-y-1'><li>• Saldo de salário e 13º salário proporcional.</li><li>• Férias vencidas e proporcionais + 1/3.</li><li>• Não há direito a saque do FGTS, multa de 40% ou seguro-desemprego.</li></ul><p class='mt-2'><strong>Demissão por justa causa:</strong></p><ul class='mt-2 space-y-1'><li>• Direito apenas ao saldo de salário e férias vencidas + 1/3 (se houver).</li><li>• Perde-se o direito às demais verbas rescisórias.</li></ul>",
+            "tags": ["tipos rescisão", "direitos", "sem justa causa", "justa causa"],
+            "related_calculators": ["rescisao"]
+          },
+          {
+            "id": "aviso_previo",
+            "question": "Como o aviso prévio é aplicado?",
+            "answer": "<p>O aviso prévio pode ser cumprido de duas formas: <strong>trabalhado</strong> ou <strong>indenizado</strong>.</p><p class='mt-2'><strong>Aviso Prévio Trabalhado:</strong></p><ul class='mt-2 space-y-1'><li>• O empregado continua a exercer suas funções durante o período do aviso.</li><li>• A remuneração do período é o salário normal.</li><li>• Garante o direito à redução de 2 horas na jornada diária ou a ausência por 7 dias corridos.</li></ul><p class='mt-2'><strong>Aviso Prévio Indenizado:</strong></p><ul class='mt-2 space-y-1'><li>• O desligamento do empregado é imediato.</li><li>• A parte que rescindiu o contrato paga à outra o valor correspondente.</li><li>• O valor inclui o salário e seus reflexos em férias, 13º e FGTS.</li></ul><p class='mt-2'><strong>Duração:</strong> O período do aviso é de 30 dias, acrescido de 3 dias por ano de serviço na mesma empresa, até o limite de 90 dias no total.</p>",
+            "tags": ["aviso prévio", "trabalhado", "indenizado", "duração"],
+            "related_calculators": ["rescisao"]
+          },
+          {
+            "id": "acordo_mutuo",
+            "question": "O que caracteriza o acordo mútuo?",
+            "answer": "<p>O acordo mútuo é uma modalidade de rescisão consensual entre empregado e empregador. Apresenta uma estrutura de direitos intermediária:</p><p class='mt-2'><strong>Direitos no acordo mútuo:</strong></p><ul class='mt-2 space-y-1'><li>• Saque de 80% do saldo do FGTS.</li><li>• Multa de 20% sobre o saldo do FGTS (em vez de 40%).</li><li>• Manutenção do direito ao 13º salário e férias proporcionais.</li><li>• Pagamento de metade do aviso prévio, se indenizado.</li></ul><p class='mt-2'>Nesta modalidade, o trabalhador <strong>não tem direito ao seguro-desemprego</strong>. É uma alternativa quando há interesse de ambas as partes no encerramento do contrato.</p>",
+            "tags": ["acordo mútuo", "FGTS 80%", "multa 20%", "seguro desemprego"],
+            "related_calculators": ["rescisao", "fgts"]
+          },
+          {
+            "id": "rescisao_prazo_pagamento",
+            "question": "Qual o prazo para pagamento das verbas rescisórias?",
+            "answer": "<p>A legislação estabelece um prazo único para o pagamento das verbas rescisórias, independentemente do tipo de aviso prévio (trabalhado ou indenizado).</p><p class='mt-2'>O empregador tem até <strong>10 dias corridos</strong>, contados a partir do término do contrato de trabalho, para efetuar o pagamento dos valores devidos ao empregado.</p><p class='mt-2'>O término do contrato ocorre:</p><ul class='mt-2 space-y-1'><li>• No último dia de trabalho, em caso de aviso prévio trabalhado.</li><li>• Na data da comunicação da demissão, em caso de aviso prévio indenizado.</li></ul><p class='mt-2'>O descumprimento deste prazo sujeita o empregador ao pagamento de uma multa no valor de um salário do empregado.</p>",
+            "tags": ["prazo", "pagamento", "verbas rescisórias", "10 dias", "multa", "TRCT"],
+            "related_calculators": ["rescisao"]
+          }
+        ]
+      },
+      {
+        "id": "fgts",
+        "title": "FGTS",
+        "icon": "savings",
+        "materialIcon": "savings",
+        "questions": [
+          {
+            "id": "fgts_extincao_conta",
+            "question": "O que acontece com a conta do FGTS após saque por demissão?",
+            "answer": "<p>Após o saque do FGTS por demissão sem justa causa, a conta permanece ativa enquanto houver depósitos futuros (ex.: novo emprego). Se a conta não receber novos depósitos, ela fica inativa mas o saldo histórico permanece consultável. Em casos de saque integral, o saldo é zerado até novos depósitos serem realizados.</p>",
+            "tags": ["conta FGTS", "saque", "inativa"],
+            "related_calculators": ["fgts"]
+          },
+          {
+            "id": "fgts_multas_pagas",
+            "question": "Como é calculada a multa de 40% do FGTS?",
+            "answer": "<p>A multa de 40% corresponde a 40% sobre o saldo total do FGTS constituído durante o contrato de trabalho e é devida em demissão sem justa causa. Ela é calculada sobre o montante depositado na conta vinculada do empregado até a data de rescisão.</p>",
+            "tags": ["multa 40%", "rescisão", "cálculo"],
+            "related_calculators": ["rescisao", "fgts"]
+          },
+          {
+            "id": "fgts_saque",
+            "question": "Em quais situações é permitido o saque do FGTS?",
+            "answer": "<p>O saque do Fundo de Garantia do Tempo de Serviço (FGTS) é permitido em situações específicas, divididas em modalidades de saque total ou parcial.</p><p class='mt-2'><strong>Saque do saldo integral:</strong></p><ul class='mt-2 space-y-1'><li>• Demissão sem justa causa.</li><li>• Aposentadoria.</li><li>• Aquisição de moradia própria.</li><li>• Diagnóstico de doenças graves.</li></ul><p class='mt-2'><strong>Saque parcial do saldo:</strong></p><ul class='mt-2 space-y-1'><li>• Adesão ao Saque-Aniversário.</li><li>• Rescisão por acordo mútuo (80% do saldo).</li><li>• Situação de calamidade pública.</li></ul><p class='mt-2'>O saque não é permitido em casos de pedido de demissão ou demissão por justa causa.</p>",
+            "tags": ["saque FGTS", "modalidades", "total", "parcial"],
+            "related_calculators": ["fgts", "rescisao"]
+          },
+          {
+            "id": "saque_aniversario",
+            "question": "Quais as implicações de optar pelo saque-aniversário?",
+            "answer": "<p>A adesão ao saque-aniversário é uma decisão que deve ser ponderada com base no perfil e nos objetivos do trabalhador.</p><p class='mt-2'><strong>Cenários favoráveis à adesão:</strong></p><ul class='mt-2 space-y-1'><li>• Existência de estabilidade profissional.</li><li>• Objetivo de obter uma renda extra anual.</li><li>• Ausência de planos de demissão a curto prazo.</li><li>• Capacidade de investir o recurso de forma planejada.</li></ul><p class='mt-2'><strong>Cenários desfavoráveis à adesão:</strong></p><ul class='mt-2 space-y-1'><li>• Risco iminente de demissão.</li><li>• Dependência do FGTS como reserva de emergência.</li><li>• Atuação em setores de alta rotatividade.</li></ul><p class='mt-2'>É fundamental ressaltar que o optante pelo saque-aniversário, em caso de demissão sem justa causa, perde o direito ao saque integral do saldo, mantendo apenas o direito à multa de 40%.</p>",
+            "tags": ["saque aniversário", "vale a pena", "estabilidade", "demissão"],
+            "related_calculators": ["fgts"]
+          },
+          {
+            "id": "fgts_calculo",
+            "question": "Como o FGTS é calculado?",
+            "answer": "<p>O cálculo do FGTS envolve o depósito mensal feito pelo empregador e a rentabilidade do fundo.</p><p class='mt-2'><strong>Depósito Mensal:</strong></p><ul class='mt-2 space-y-1'><li>O empregador deposita <strong>8% do seu salário bruto</strong> em uma conta vinculada ao FGTS.</li><li>Para contratos de aprendizagem, o percentual é de 2%.</li></ul><p class='mt-2'><strong>Rentabilidade:</strong></p><ul class='mt-2 space-y-1'><li>O saldo da conta do FGTS é corrigido mensalmente com base na <strong>Taxa Referencial (TR)</strong> mais <strong>3% ao ano</strong>.</li><li>A nossa calculadora utiliza os dados históricos da TR para estimar o saldo com juros.</li></ul><p class='mt-2'><strong>Cálculo Total:</strong> A calculadora simula o acúmulo desses depósitos e juros ao longo do período informado, partindo do saldo anterior que você já possuía.</p>",
+            "tags": ["cálculo FGTS", "8%", "rentabilidade", "TR", "juros"],
+            "related_calculators": ["fgts"]
+          },
+          {
+            "id": "fgts_distribuicao_lucro",
+            "question": "O que é a Distribuição de Resultados do FGTS?",
+            "answer": "<p>A <strong>Distribuição de Resultados do FGTS</strong>, popularmente conhecida como \"lucro do FGTS\", é um repasse anual de parte do resultado financeiro positivo obtido pelo Fundo de Garantia para as contas dos trabalhadores.</p><p class='mt-2'><strong>Como funciona:</strong></p><ul class='mt-2 space-y-1'><li>• O FGTS investe os recursos dos trabalhadores e obtém um lucro.</li><li>• Por lei, uma parte desse lucro é distribuída entre todas as contas que possuíam saldo em 31 de dezembro do ano anterior.</li><li>• O valor creditado é proporcional ao saldo que cada trabalhador tinha na data de referência.</li></ul><p class='mt-2'>Esse valor é somado ao saldo principal e segue as mesmas regras de saque do Fundo, não podendo ser retirado de forma avulsa.</p>",
+            "tags": ["lucro fgts", "distribuição de resultados", "rentabilidade", "crédito", "saldo"],
+            "related_calculators": ["fgts"]
+          }
+        ]
+      },
+      {
+        "id": "inss",
+        "title": "INSS",
+        "icon": "security",
+        "materialIcon": "security",
+        "questions": [
+          {
+            "id": "inss_contribuicao_facultativa",
+            "question": "O que é contribuição facultativa ao INSS?",
+            "answer": "<p>A contribuição facultativa é destinada a pessoas que não têm vínculo empregatício (ex.: donas de casa, estudantes) e desejam contribuir ao INSS para garantir benefícios futuros como aposentadoria. Essas contribuições têm alíquotas e regras específicas e podem ser realizadas por recolhimentos mensais.</p>",
+            "tags": ["facultativa", "aposentadoria", "contribuição"],
+            "related_calculators": ["inss"]
+          },
+          {
+            "id": "inss_erro_recolhimento",
+            "question": "O que fazer em caso de recolhimento incorreto do INSS pelo empregador?",
+            "answer": "<p>Em caso de recolhimento incorreto, o empregado deve procurar o departamento pessoal para correção e, se necessário, registrar reclamação junto à Previdência Social. Documentos que comprovem o vínculo e os salários pagos (contracheques, contrato e extrato do CNIS) são importantes para correção.</p>",
+            "tags": ["recolhimento", "erro", "CNIS"],
+            "related_calculators": ["inss", "rescisao"]
+          },
+          {
+            "id": "inss_desconto",
+            "question": "Como é calculado o desconto do INSS?",
+            "answer": "<p>O cálculo da contribuição ao INSS utiliza um sistema de alíquotas <strong>progressivas</strong>, de forma similar ao Imposto de Renda. A alíquota não é aplicada diretamente sobre o salário total.</p><p class='mt-2'><strong>Mecanismo de cálculo:</strong></p><ul class='mt-2 space-y-1'><li>• O salário de contribuição é dividido em faixas de valores.</li><li>• A cada faixa corresponde uma alíquota específica.</li><li>• O valor final do desconto é a soma dos valores apurados em cada faixa.</li></ul><p class='mt-2'><strong>Exemplo de cálculo (salário de R$ 3.000):</strong></p><ul class='mt-2 space-y-1'><li>• Faixa 1: R$ 1.518,00 × 7,5% = R$ 113,85</li><li>• Faixa 2: R$ 1.482,00 × 9% = R$ 133,38</li><li>• Total do desconto INSS = R$ 247,23</li></ul><p class='mt-2'>Neste exemplo, a alíquota efetiva é de 8,24%, e não 9%.</p>",
+            "tags": ["INSS progressivo", "faixas", "alíquota efetiva", "cálculo"],
+            "related_calculators": ["inss", "salarioLiquido"]
+          },
+          {
+            "id": "inss_teto",
+            "question": "Existe um valor máximo para o desconto do INSS?",
+            "answer": "<p>Sim, a legislação estabelece um <strong>teto de contribuição</strong> para o INSS.</p><p class='mt-2'><strong>Valor máximo (2025):</strong> R$ 908,85</p><p class='mt-2'><strong>Aplicação do teto:</strong></p><ul class='mt-2 space-y-1'><li>• Para um salário de R$ 10.000, o desconto é de R$ 908,85.</li><li>• Para um salário de R$ 20.000, o desconto permanece em R$ 908,85.</li><li>• O valor do desconto nunca ultrapassa o teto estabelecido.</li></ul><p class='mt-2'>A existência do teto implica que, embora contribuintes com salários mais altos paguem um valor maior, a contribuição é proporcionalmente menor em relação à sua renda. Em contrapartida, os benefícios previdenciários também são limitados ao teto vigente na época da sua concessão.</p>",
+            "tags": ["teto INSS", "valor máximo", "R$ 908,85", "benefícios"],
+            "related_calculators": ["inss", "salarioLiquido"]
+          }
+        ]
+      },
+      {
+        "id": "irrf",
+        "title": "Imposto de Renda",
+        "icon": "receipt",
+        "materialIcon": "receipt",
+        "questions": [
+          {
+            "id": "irrf_isencao",
+            "question": "Quando um trabalhador está isento do IRRF?",
+            "answer": "<p>Trabalhadores cuja base de cálculo mensal seja inferior ao limite de isenção da tabela do IRRF estão isentos. Além disso, determinadas rendas específicas podem ter tratamento diferenciado. Consulte a tabela vigente para confirmar os limites de isenção.</p>",
+            "tags": ["isenção", "tabela", "base cálculo"],
+            "related_calculators": ["salarioLiquido"]
+          },
+          {
+            "id": "irrf_dependente_documentacao",
+            "question": "Quais documentos comprovam dependentes para dedução do IRRF?",
+            "answer": "<p>Documentos como certidão de nascimento, declaração de guarda, ou outro documento legal que comprove a condição de dependente devem ser apresentados ao empregador. Para dependentes maiores em ensino superior, comprovantes de matrícula podem ser solicitados.</p>",
+            "tags": ["documentos", "dependentes", "comprovação"],
+            "related_calculators": ["salarioLiquido"]
+          },
+          {
+            "id": "irrf_calculo",
+            "question": "Como é calculado o Imposto de Renda na folha de pagamento?",
+            "answer": "<p>O cálculo do Imposto de Renda Retido na Fonte (IRRF) segue um processo estruturado em etapas:</p><p class='mt-2'><strong>1. Apuração da Base de Cálculo:</strong></p><ul class='mt-2 space-y-1'><li>• Salário bruto</li><li>• (-) Desconto do INSS</li><li>• (-) Dedução por dependente (R$ 189,59 por dependente)</li><li>• (-) Outras deduções legais (ex: pensão alimentícia)</li></ul><p class='mt-2'><strong>2. Aplicação da Tabela Progressiva:</strong></p><ul class='mt-2 space-y-1'><li>• Até R$ 2.259,20: Isento</li><li>• De R$ 2.259,21 a R$ 2.826,65: 7,5%</li><li>• De R$ 2.826,66 a R$ 3.751,05: 15%</li><li>• De R$ 3.751,06 a R$ 4.664,68: 22,5%</li><li>• Acima de R$ 4.664,68: 27,5%</li></ul><p class='mt-2'><strong>3. Subtração da Parcela a Deduzir:</strong> Do valor apurado na etapa anterior, subtrai-se a parcela a deduzir correspondente à faixa de alíquota.</p>",
+            "tags": ["IRRF cálculo", "base cálculo", "tabela progressiva", "dependentes"],
+            "related_calculators": ["salarioLiquido"]
+          },
+          {
+            "id": "irrf_dependentes",
+            "question": "Quem pode ser considerado dependente para fins de IRRF?",
+            "answer": "<p>Para fins de dedução na base de cálculo do IRRF, podem ser considerados dependentes:</p><p class='mt-2'><strong>Categorias de dependentes:</strong></p><ul class='mt-2 space-y-1'><li>• Cônjuge ou companheiro(a).</li><li>• Filhos ou enteados até 21 anos.</li><li>• Filhos ou enteados cursando ensino superior, até 24 anos.</li><li>• Filhos ou enteados com incapacidade física ou mental para o trabalho, em qualquer idade.</li><li>• Pais, avós e bisavós que não aufiram rendimentos, tributáveis ou não, superiores ao limite de isenção mensal.</li><li>• Menor pobre, até 21 anos, que o contribuinte crie e eduque e do qual detenha a guarda judicial.</li></ul><p class='mt-2'><strong>Valor da dedução (2025):</strong> R$ 189,59 por dependente.</p><p class='mt-2'>É mandatório que o dependente informado na folha de pagamento seja o mesmo que constará na Declaração de Ajuste Anual do IRPF.</p>",
+            "tags": ["dependentes IRRF", "R$ 189,59", "filhos", "cônjuge"],
+            "related_calculators": ["salarioLiquido"]
+          }
+        ]
+      },
+      {
+        "id": "seguro-desemprego",
+        "title": "Seguro-Desemprego",
+        "icon": "work_off",
+        "materialIcon": "work_off",
+        "questions": [
+          {
+            "id": "seguro_requisitos_alterados",
+            "question": "Os requisitos para receber o seguro-desemprego podem mudar?",
+            "answer": "<p>Sim. Os requisitos e valores do seguro-desemprego são definidos por normas governamentais e podem ser alterados por novas portarias ou leis. É importante consultar as regras vigentes no momento da solicitação.</p>",
+            "tags": ["requisitos", "alteração", "normas"],
+            "related_calculators": ["seguroDesemprego"]
+          },
+          {
+            "id": "seguro_documentos_necessarios",
+            "question": "Quais documentos são necessários para solicitar o seguro-desemprego?",
+            "answer": "<p>Geralmente são exigidos: Termo de Rescisão do Contrato de Trabalho (TRCT), comprovante de recebimento das verbas rescisórias, documentos pessoais (RG, CPF), e documentos de comprovação de vínculo empregatício. Verifique o site do Ministério do Trabalho para a lista atualizada.</p>",
+            "tags": ["documentos", "TRCT", "solicitação"],
+            "related_calculators": ["seguroDesemprego"]
+          },
+          {
+            "id": "seguro_calculo",
+            "question": "Como o valor do seguro-desemprego é calculado?",
+            "answer": "<p>O cálculo do seguro-desemprego baseia-se na média dos seus 3 últimos salários e segue faixas de valores definidas pelo governo anualmente.</p><p class='mt-2'><strong>Regras de Cálculo (2025):</strong></p><ul class='mt-2 space-y-1'><li><strong>Salário médio até R$ 2.138,76:</strong> multiplica-se por 0,8.</li><li><strong>De R$ 2.138,77 até R$ 3.564,96:</strong> o que exceder R$ 2.138,76 multiplica-se por 0,5 e soma-se com R$ 1.711,01.</li><li><strong>Acima de R$ 3.564,96:</strong> o valor da parcela será fixo de R$ 2.424,11.</li></ul><p class='mt-2'>O valor da parcela nunca será inferior ao salário mínimo vigente (R$ 1.518,00 em 2025).</p>",
+            "tags": ["seguro-desemprego", "cálculo", "parcela", "regras", "2025"],
+            "related_calculators": ["seguroDesemprego"]
+          }
+        ]
+      },
+      {
+        "id": "beneficios",
+        "title": "Benefícios Trabalhistas",
+        "icon": "redeem",
+        "materialIcon": "redeem",
+        "questions": [
+          {
+            "id": "salario_familia_direito",
+            "question": "O que é e quem tem direito ao Salário-Família?",
+            "answer": "<p>O <strong>Salário-Família</strong> é um benefício previdenciário pago ao empregado de baixa renda em razão de seus dependentes. O valor é pago mensalmente, por filho ou equiparado de até 14 anos, ou inválido de qualquer idade.</p><p class='mt-2'>Para ter direito, o trabalhador precisa:</p><ul class='mt-2 space-y-1'><li>• Ter remuneração mensal abaixo do teto estabelecido pelo governo anualmente.</li><li>• Apresentar a certidão de nascimento do filho ou equiparado.</li><li>• Manter a carteira de vacinação da criança (até 6 anos) em dia.</li><li>• Comprovar a frequência escolar do filho (a partir de 4 anos).</li></ul><p class='mt-2'>O pagamento é feito diretamente pela empresa e deduzido da guia de recolhimento do INSS.</p>",
+            "tags": ["salário-família", "benefício", "filhos", "dependentes", "baixa renda"],
+            "related_calculators": ["salarioLiquido"]
+          },
+          {
+            "id": "licenca_maternidade",
+            "question": "Como funciona a Licença-Maternidade e o Salário-Maternidade?",
+            "answer": "<p>A <strong>Licença-Maternidade</strong> é o período de afastamento remunerado garantido à trabalhadora em caso de nascimento de filho, adoção ou guarda judicial para fins de adoção. A duração padrão é de <strong>120 dias</strong>, podendo ser estendida para 180 dias em empresas participantes do Programa Empresa Cidadã.</p><p class='mt-2'>Durante a licença, a empregada recebe o <strong>Salário-Maternidade</strong>, que tem o mesmo valor de sua remuneração integral. Para a empregada com carteira assinada, o pagamento é feito pela empresa, que é posteriormente ressarcida pelo INSS. Para outras seguradas (como autônomas), o pagamento é feito diretamente pelo INSS.</p><p class='mt-2'>O início da licença pode ocorrer a partir de 28 dias antes do parto ou na data de nascimento do bebê.</p>",
+            "tags": ["licença-maternidade", "salário-maternidade", "gestante", "adoção", "afastamento"],
+            "related_calculators": []
+          },
+          {
+            "id": "vale_transporte_faq",
+            "question": "O Vale-Transporte é obrigatório? Como funciona o desconto?",
+            "answer": "<p>Sim, o fornecimento do <strong>Vale-Transporte</strong> é uma obrigação do empregador para todos os empregados que utilizam transporte público para o deslocamento entre residência e trabalho.</p><p class='mt-2'>O custeio é compartilhado. A empresa está autorizada a descontar do empregado um percentual de <strong>até 6% do seu salário base</strong>. Veja como funciona:</p><ul class='mt-2 space-y-1'><li>• Se o custo total do transporte for <strong>maior</strong> que 6% do salário base, o desconto será de 6%.</li><li>• Se o custo total do transporte for <strong>menor</strong> que 6% do salário base, o desconto será limitado ao valor real do benefício.</li></ul><p class='mt-2'>O empregado pode optar por não receber o benefício, devendo formalizar essa decisão por escrito.</p>",
+            "tags": ["vale-transporte", "vt", "desconto", "6%", "obrigatório", "transporte público"],
+            "related_calculators": ["salarioLiquido"]
+          }
+        ]
+      },
+      {
+        "id": "jornada_horas_extras",
+        "title": "Jornada de Trabalho e Horas Extras",
+        "icon": "schedule",
+        "materialIcon": "schedule",
+        "questions": [
+          {
+            "id": "jornada_padrao_clt",
+            "question": "Qual a jornada de trabalho padrão segundo a CLT?",
+            "answer": "<p>A Consolidação das Leis do Trabalho (CLT) estabelece que a duração normal do trabalho, para os empregados em qualquer atividade privada, não excederá de <strong>8 horas diárias e 44 horas semanais</strong>.</p><p class='mt-2'>Qualquer tempo que ultrapasse este limite diário ou semanal é considerado hora extra e deve ser remunerado com um acréscimo.</p><p class='mt-2'>Acordos individuais ou convenções coletivas podem estabelecer jornadas diferentes, como a escala 12x36 (12 horas de trabalho por 36 horas de descanso), desde que respeitados os limites legais e os intervalos.</p>",
+            "tags": ["jornada de trabalho", "clt", "8 horas", "44 horas semanais", "limite"],
+            "related_calculators": ["horasExtras"]
+          },
+          {
+            "id": "intervalo_intrajornada",
+            "question": "Quais são as regras para o intervalo de almoço e descanso?",
+            "answer": "<p>O intervalo para repouso e alimentação, conhecido como <strong>intervalo intrajornada</strong>, é obrigatório em qualquer trabalho contínuo cuja duração exceda 6 horas.</p><p class='mt-2'><strong>Regras de duração:</strong></p><ul class='mt-2 space-y-1'><li>• <strong>Jornada acima de 6 horas:</strong> O intervalo é de, no mínimo, 1 hora e, no máximo, 2 horas.</li><li>• <strong>Jornada entre 4 e 6 horas:</strong> O intervalo obrigatório é de 15 minutos.</li><li>• <strong>Jornada de até 4 horas:</strong> Não há obrigatoriedade de intervalo.</li></ul><p class='mt-2'>A Reforma Trabalhista permitiu que o intervalo mínimo de 1 hora possa ser reduzido para 30 minutos, desde que haja acordo ou convenção coletiva. Se o intervalo não for concedido ou for concedido parcialmente, o empregador deve remunerar o período suprimido com um acréscimo de 50% sobre o valor da hora normal de trabalho.</p>",
+            "tags": ["intervalo", "almoço", "descanso", "intrajornada", "regras"],
+            "related_calculators": []
+          },
+          {
+            "id": "horas_extras_percentuais",
+            "question": "Quais os percentuais de adicional para as horas extras?",
+            "answer": "<p>O valor da hora extra é superior ao da hora normal de trabalho. O adicional mínimo previsto na Constituição é de <strong>50%</strong> para horas trabalhadas em dias úteis e sábados.</p><p class='mt-2'><strong>Principais percentuais:</strong></p><ul class='mt-2 space-y-1'><li>• <strong>50% (mínimo):</strong> Para horas extras realizadas de segunda a sábado.</li><li>• <strong>100%:</strong> Para horas extras realizadas em domingos e feriados, que devem ser pagas em dobro.</li></ul><p class='mt-2'>Convenções coletivas de cada categoria profissional podem estabelecer percentuais superiores, como 60%, 75% ou outros. É importante verificar o que diz a convenção da sua categoria.</p>",
+            "tags": ["horas extras", "adicional", "50%", "100%", "domingos", "feriados"],
+            "related_calculators": ["horasExtras"]
+          },
+          {
+            "id": "dsr_sobre_horas_extras",
+            "question": "O que é o DSR sobre horas extras e como é calculado?",
+            "answer": "<p>O <strong>Descanso Semanal Remunerado (DSR)</strong> sobre horas extras é um valor adicional que o trabalhador recebe para que as horas extras habituais reflitam na remuneração do seu dia de folga (geralmente o domingo).</p><p class='mt-2'>O cálculo é feito da seguinte forma:</p><ul class='mt-2 space-y-1'><li>1. Soma-se o valor total de horas extras recebidas no mês.</li><li>2. Divide-se o resultado pelo número de dias úteis do mês (incluindo sábados).</li><li>3. Multiplica-se o resultado pelo número de domingos e feriados do mês.</li></ul><p class='mt-2'>Esse cálculo garante que o valor do descanso semanal seja compatível com a remuneração total do empregado, incluindo o trabalho extraordinário.</p>",
+            "tags": ["dsr", "descanso semanal remunerado", "reflexo", "cálculo", "horas extras"],
+            "related_calculators": ["horasExtras", "salarioLiquido"]
+          },
+          {
+            "id": "banco_de_horas",
+            "question": "Qual a diferença entre banco de horas e pagamento de horas extras?",
+            "answer": "<p>Tanto o banco de horas quanto o pagamento de horas extras são formas de lidar com o trabalho além da jornada normal, mas funcionam de maneiras diferentes.</p><p class='mt-2'><strong>Pagamento de Horas Extras:</strong></p><ul class='mt-2 space-y-1'><li>• As horas excedentes são pagas na folha de pagamento do mês seguinte.</li><li>• O valor é a hora normal acrescida do adicional (mínimo de 50%).</li></ul><p class='mt-2'><strong>Banco de Horas:</strong></p><ul class='mt-2 space-y-1'><li>• As horas excedentes são acumuladas em um \"banco\" para serem compensadas com folgas ou redução da jornada em outro dia.</li><li>• A compensação deve ocorrer em um prazo máximo, geralmente de 6 meses (acordo individual) ou 1 ano (convenção coletiva).</li><li>• Se as horas não forem compensadas no prazo, devem ser pagas com o adicional correspondente.</li></ul>",
+            "tags": ["banco de horas", "compensação", "folga", "pagamento", "diferença"],
+            "related_calculators": ["horasExtras"]
+          }
+        ]
+      },
+      {
+        "id": "adicionais_remuneracao",
+        "title": "Adicionais de Remuneração",
+        "icon": "payments",
+        "materialIcon": "payments",
+        "questions": [
+          {
+            "id": "adicional_insalubridade",
+            "question": "O que é o adicional de insalubridade e como é calculado?",
+            "answer": "<p>O <strong>adicional de insalubridade</strong> é um direito concedido a trabalhadores que exercem suas atividades expostos a agentes nocivos à saúde, acima dos limites de tolerância fixados em lei (ex: ruído excessivo, agentes químicos, frio intenso).</p><p class='mt-2'>O cálculo é feito com base em um percentual sobre o <strong>salário mínimo</strong> regional, e não sobre o salário do empregado.</p><ul class='mt-2 space-y-1'><li>• <strong>Grau Máximo:</strong> 40%</li><li>• <strong>Grau Médio:</strong> 20%</li><li>• <strong>Grau Mínimo:</strong> 10%</li></ul><p class='mt-2'>A caracterização da insalubridade e a definição do grau dependem de perícia técnica no local de trabalho. O trabalhador não pode acumular os adicionais de insalubridade e periculosidade, devendo optar pelo que for mais vantajoso.</p>",
+            "tags": ["insalubridade", "adicional", "salário mínimo", "grau máximo", "perícia"],
+            "related_calculators": ["salarioLiquido"]
+          },
+          {
+            "id": "adicional_noturno",
+            "question": "Como funciona o adicional noturno?",
+            "answer": "<p>O <strong>adicional noturno</strong> é uma compensação para o trabalhador que exerce suas atividades no período noturno. A lei considera trabalho noturno o executado entre as <strong>22h de um dia e as 5h do dia seguinte</strong> (para trabalhadores urbanos).</p><p class='mt-2'><strong>Regras principais:</strong></p><ul class='mt-2 space-y-1'><li>• A hora noturna é computada como <strong>52 minutos e 30 segundos</strong> (hora reduzida), e não 60 minutos.</li><li>• A remuneração da hora noturna tem um acréscimo de, no mínimo, <strong>20%</strong> sobre o valor da hora diurna.</li></ul><p class='mt-2'>Isso significa que, a cada 7 horas trabalhadas no período noturno, o empregado tem direito a receber o equivalente a 8 horas de trabalho, com o adicional de 20%.</p>",
+            "tags": ["adicional noturno", "20%", "hora reduzida", "22h às 5h"],
+            "related_calculators": ["horasExtras", "salarioLiquido"]
+          },
+          {
+            "id": "adicional_periculosidade_faq",
+            "question": "Quem tem direito ao adicional de periculosidade?",
+            "answer": "<p>O <strong>adicional de periculosidade</strong> é um direito dos empregados que trabalham em contato permanente com atividades ou operações perigosas, que impliquem risco acentuado.</p><p class='mt-2'>As principais atividades consideradas perigosas são aquelas com exposição a:</p><ul class='mt-2 space-y-1'><li>• Inflamáveis, explosivos ou energia elétrica.</li><li>• Roubos ou outras espécies de violência física nas atividades profissionais de segurança pessoal ou patrimonial.</li></ul><p class='mt-2'>O valor do adicional é de <strong>30% sobre o salário base</strong> do empregado (sem acréscimos). Conforme a CLT, não é permitido acumular os adicionais de periculosidade e insalubridade, devendo o empregado optar por um deles, caso tenha direito a ambos.</p>",
+            "tags": ["periculosidade", "adicional", "30%", "risco", "inflamáveis", "eletricidade"],
+            "related_calculators": ["salarioLiquido"]
+          }
+        ]
+      },
+      {
+        "id": "pis_pasep",
+        "title": "Abono Salarial PIS/PASEP",
+        "icon": "paid",
+        "materialIcon": "paid",
+        "questions": [
+          {
+            "id": "pis_pasep_definicao",
+            "question": "O que é o Abono Salarial PIS/PASEP?",
+            "answer": "<p>O <strong>Abono Salarial</strong> é um benefício anual, no valor máximo de um salário mínimo, destinado a trabalhadores que satisfazem certos requisitos legais. O <strong>PIS</strong> (Programa de Integração Social) é pago pela Caixa Econômica Federal a trabalhadores da iniciativa privada. O <strong>PASEP</strong> (Programa de Formação do Patrimônio do Servidor Público) é pago pelo Banco do Brasil a servidores públicos.</p><p class='mt-2'>O objetivo do benefício é promover uma melhor distribuição de renda.</p>",
+            "tags": ["pis", "pasep", "abono salarial", "benefício", "caixa", "banco do brasil"],
+            "related_calculators": ["pisPasep"]
+          },
+          {
+            "id": "pis_pasep_direito",
+            "question": "Quem tem direito a receber o Abono Salarial?",
+            "answer": "<p>Para ter direito ao Abono Salarial, o trabalhador precisa atender a todos os seguintes critérios:</p><ul class='mt-2 space-y-1'><li>• Estar cadastrado no PIS/PASEP há pelo menos cinco anos.</li><li>• Ter recebido remuneração média de até dois salários mínimos durante o ano-base.</li><li>• Ter exercido atividade remunerada para Pessoa Jurídica, durante pelo menos 30 dias, consecutivos ou não, no ano-base considerado para apuração.</li><li>• Ter seus dados informados pelo empregador (Pessoa Jurídica) corretamente na Relação Anual de Informações Sociais (RAIS) ou no eSocial.</li></ul>",
+            "tags": ["direito", "requisitos", "critérios", "abono salarial", "pis"],
+            "related_calculators": ["pisPasep"]
+          },
+          {
+            "id": "pis_pasep_valor_calendario",
+            "question": "Qual o valor e como funciona o calendário de pagamento?",
+            "answer": "<p>O valor do abono é <strong>proporcional ao tempo de serviço</strong> do trabalhador no ano-base. O cálculo corresponde a 1/12 do valor do salário mínimo vigente na data do pagamento, multiplicado pelo número de meses trabalhados no ano correspondente.</p><p class='mt-2'>O <strong>calendário de pagamento</strong> é estabelecido anualmente pelo CODEFAT (Conselho Deliberativo do Fundo de Amparo ao Trabalhador) e geralmente é escalonado de acordo com o mês de nascimento do trabalhador (para o PIS) ou o número final da inscrição (para o PASEP).</p>",
+            "tags": ["valor", "calendário", "pagamento", "proporcional", "codefat"],
+            "related_calculators": ["pisPasep"]
+          }
+        ]
+      },
+      {
+        "id": "outras_modalidades",
+        "title": "Outras Modalidades de Contrato",
+        "icon": "work_history",
+        "materialIcon": "work_history",
+        "questions": [
+          {
+            "id": "teletrabalho_regras",
+            "question": "Quais as regras específicas para o teletrabalho (home office)?",
+            "answer": "<p>O <strong>teletrabalho</strong>, ou home office, é a prestação de serviços realizada preponderantemente fora das dependências do empregador, com a utilização de tecnologias de informação e de comunicação.</p><p class='mt-2'><strong>Regras principais:</strong></p><ul class='mt-2 space-y-1'><li>• Deve constar expressamente no contrato de trabalho.</li><li>• As disposições relativas à responsabilidade pela aquisição, manutenção ou fornecimento dos equipamentos e da infraestrutura necessária, bem como ao reembolso de despesas, devem ser previstas em contrato escrito.</li><li>• O empregador deve instruir os empregados, de maneira expressa e ostensiva, quanto às precauções a tomar a fim de evitar doenças e acidentes de trabalho.</li><li>• O controle de jornada pode ser dispensado se o empregado trabalhar por produção ou tarefa, mas se houver controle de horário, as horas extras são devidas.</li></ul>",
+            "tags": ["teletrabalho", "home office", "regras", "contrato", "despesas"],
+            "related_calculators": []
+          },
+          {
+            "id": "estagio_direitos",
+            "question": "Quais são os direitos de um estagiário?",
+            "answer": "<p>O estágio <strong>não cria vínculo empregatício</strong> de qualquer natureza, desde que observados os requisitos legais. Ele é um ato educativo escolar supervisionado.</p><p class='mt-2'><strong>Principais direitos do estagiário:</strong></p><ul class='mt-2 space-y-1'><li>• Bolsa-auxílio (compulsória para estágios não-obrigatórios).</li><li>• Auxílio-transporte (compulsório para estágios não-obrigatórios).</li><li>• Recesso remunerado de 30 dias a cada 12 meses de estágio.</li><li>• Carga horária máxima de 6 horas diárias e 30 horas semanais.</li><li>• Seguro contra acidentes pessoais.</li></ul><p class='mt-2'>O estagiário não tem direito a 13º salário, aviso prévio, FGTS ou férias com 1/3, pois não é regido pela CLT.</p>",
+            "tags": ["estágio", "estagiário", "direitos", "bolsa-auxílio", "recesso", "não é clt"],
+            "related_calculators": []
+          },
+          {
+            "id": "aprendiz_direitos",
+            "question": "Quais são os direitos do Jovem Aprendiz?",
+            "answer": "<p>O contrato de aprendizagem é um contrato de trabalho especial, com direitos e deveres específicos, destinado a jovens entre 14 e 24 anos que estejam matriculados em um programa de aprendizagem.</p><p class='mt-2'><strong>Principais direitos do Jovem Aprendiz:</strong></p><ul class='mt-2 space-y-1'><li>• Anotação na Carteira de Trabalho e Previdência Social.</li><li>• Salário mínimo-hora ou piso da categoria (o que for mais benéfico).</li><li>• Jornada de trabalho não superior a 6 horas diárias (para quem não concluiu o ensino fundamental) ou 8 horas diárias (para quem já concluiu).</li><li>• Férias, 13º salário e Vale-Transporte.</li><li>• Alíquota de FGTS de 2% (em vez dos 8% padrão).</li></ul><p class='mt-2'>O contrato de aprendizagem não pode durar mais de 2 anos.</p>",
+            "tags": ["jovem aprendiz", "aprendizagem", "direitos", "fgts 2%", "contrato especial"],
+            "related_calculators": []
+          }
+        ]
+      }
+    ]
+  },
+  "enhanced_tooltips": {
+    "abono-pecuniario": {
+      "title": "Abono Pecuniário (Venda de Férias)",
+      "content": "<p>O abono pecuniário é a faculdade que o empregado tem de <strong>converter até 1/3 do seu período de férias em remuneração</strong>. Isso equivale à venda de até 10 dias de descanso para quem possui direito a 30 dias.</p><p class='mt-3'>A solicitação deve ser feita por escrito, até 15 dias antes do término do período aquisitivo, e o empregador não pode se opor.</p>",
+      "legal": "Art. 143 da CLT - O empregado poderá converter 1/3 do período de férias a que tiver direito em abono pecuniário",
+      "quick_tips": [
+        "A conversão é um direito do empregado, não uma obrigação.",
+        "A solicitação formal deve respeitar o prazo legal.",
+        "O pagamento inclui o valor dos dias vendidos mais o terço constitucional.",
+        "O direito ao descanso dos dias restantes de férias é mantido."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "É permitido vender mais de 10 dias de férias?",
+          "answer": "Não, o limite legal é de 1/3 do período de férias."
+        },
+        {
+          "doubt": "A empresa pode impor a venda das férias?",
+          "answer": "Não, a decisão de vender parte das férias é exclusiva do empregado."
+        }
+      ]
+    },
+    "adiantamento-13": {
+      "title": "Adiantamento do 13º Salário nas Férias",
+      "content": "<p>A legislação permite que o empregado solicite o <strong>adiantamento da primeira parcela do 13º salário</strong> para recebê-la juntamente com a remuneração das férias.</p><p class='mt-3'>Para exercer esse direito, o pedido formal deve ser protocolado junto ao empregador no mês de <strong>janeiro</strong> do ano correspondente. O adiantamento corresponde a 50% do salário bruto, sem descontos de INSS ou IRRF.</p>",
+      "legal": "Art. 2º da Lei nº 4.749/65 - Adiantamento da primeira parcela da gratificação natalina",
+      "quick_tips": [
+        "A solicitação deve ser formalizada em janeiro.",
+        "A primeira parcela adiantada não sofre descontos.",
+        "O valor serve como um recurso adicional para o período de descanso.",
+        "Recomenda-se que o pedido seja feito por escrito."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "A solicitação pode ser feita em qualquer mês?",
+          "answer": "Não, a lei estipula que o pedido deve ser feito em janeiro."
+        },
+        {
+          "doubt": "Há descontos na primeira parcela do 13º?",
+          "answer": "Não, a primeira parcela é paga em seu valor bruto."
+        }
+      ]
+    },
+    "ferias-vencidas": {
+      "title": "Férias Vencidas e Pagamento em Dobro",
+      "content": "<p>As férias são consideradas vencidas quando o empregador <strong>não as concede dentro do prazo legal</strong>, que é de 12 meses após o fim do período aquisitivo (este é o período concessivo). A consequência jurídica para o descumprimento deste prazo é o <strong>pagamento em dobro</strong> da remuneração de férias.</p><p class='mt-3'><strong>Cronograma:</strong> O ciclo completo envolve o período aquisitivo (12 meses de trabalho) seguido pelo período concessivo (12 meses para a concessão das férias).</p>",
+      "legal": "Art. 137 da CLT - Sempre que as férias forem concedidas após o prazo, o empregador pagará em dobro",
+      "quick_tips": [
+        "O empregador tem 12 meses para conceder as férias após o período aquisitivo.",
+        "O pagamento em dobro é uma penalidade legal pelo atraso na concessão.",
+        "O trabalhador deve monitorar os prazos para garantir seu direito.",
+        "Este direito pode ser pleiteado na Justiça do Trabalho."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "Posso me recusar a trabalhar e exigir o descanso?",
+          "answer": "O direito ao descanso permanece, mas o pagamento em dobro já está consolidado como uma penalidade devida."
+        },
+        {
+          "doubt": "A regra vale para qualquer motivo de atraso?",
+          "answer": "Sim, a obrigação do pagamento em dobro independe do motivo que levou ao atraso na concessão."
+        }
+      ]
+    },
+    "desconto_vt": {
+      "title": "Desconto de Vale-Transporte",
+      "content": "<p>A empresa está autorizada a descontar <strong>até 6% do salário base</strong> do empregado para o custeio do vale-transporte. Caso o custo total do transporte seja inferior a 6% do salário, o desconto será limitado ao valor real do benefício.</p><p class='mt-3'>O vale-transporte é um <strong>direito do trabalhador</strong>, e seu fornecimento é uma obrigação do empregador.</p>",
+      "legal": "Lei nº 7.418/85 - Custeio do vale-transporte pelo empregador",
+      "quick_tips": [
+        "O desconto está limitado a 6% do salário base.",
+        "Se o custo do transporte for menor que 6%, o desconto será igual ao custo.",
+        "O fornecimento do benefício é obrigatório, não opcional para a empresa.",
+        "O uso é restrito ao trajeto residência-trabalho e vice-versa."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "Posso optar por não receber o vale-transporte?",
+          "answer": "Sim, desde que o empregado declare formalmente que não utiliza transporte público para o deslocamento."
+        },
+        {
+          "doubt": "O benefício cobre serviços como táxi ou Uber?",
+          "answer": "Não, o vale-transporte é destinado exclusivamente ao uso em transporte público coletivo."
+        }
+      ]
+    },
+    "periculosidade": {
+      "title": "Adicional de Periculosidade",
+      "content": "<p>O adicional de periculosidade corresponde a um acréscimo de <strong>30% sobre o salário base</strong> do trabalhador. É devido aos empregados que exercem atividades com exposição a riscos acentuados, como contato com explosivos, inflamáveis, energia elétrica ou em situações de risco de roubo ou violência física.</p><p class='mt-3'>Este adicional <strong>não é cumulativo</strong> com o adicional de insalubridade. O empregado deve optar pelo que lhe for mais vantajoso.</p>",
+      "legal": "Art. 193 da CLT - Atividades ou operações perigosas",
+      "quick_tips": [
+        "O percentual é de 30% sobre o salário base, sem considerar outros acréscimos.",
+        "Não é possível acumular os adicionais de periculosidade e insalubridade.",
+        "A caracterização da periculosidade depende de laudo técnico pericial.",
+        "O não pagamento pode ser questionado judicialmente."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "É possível receber periculosidade e insalubridade ao mesmo tempo?",
+          "answer": "Não. A legislação veda a acumulação; o trabalhador deve optar pelo adicional mais benéfico."
+        },
+        {
+          "doubt": "O adicional de periculosidade incide sobre horas extras?",
+          "answer": "Sim, o adicional integra o salário para todos os efeitos legais, incluindo o cálculo de horas extras."
+        }
+      ]
+    },
+    "salario-bruto": {
+      "title": "Salário Bruto Mensal",
+      "content": "<p>O salário bruto representa o <strong>valor total da remuneração</strong> acordado em contrato de trabalho, antes da aplicação de quaisquer descontos (como INSS, Imposto de Renda, etc.).</p><p class='mt-3'><strong>Componentes do Salário Bruto:</strong></p><ul class='mt-2 space-y-1'><li>• Salário base</li><li>• Horas extras habituais</li><li>• Adicionais (insalubridade, periculosidade, noturno)</li><li>• Comissões e gratificações</li></ul><p class='mt-3'>Para fins de cálculo, deve-se utilizar o valor que consta no contracheque ou na carteira de trabalho.</p>",
+      "legal": "Art. 457 da CLT - Compreendem-se na remuneração do empregado, para todos os efeitos legais, além do salário devido e pago diretamente pelo empregador",
+      "quick_tips": [
+        "O valor de referência deve ser consultado no contracheque ou na carteira de trabalho.",
+        "Adicionais fixos, como insalubridade e periculosidade, devem ser incluídos.",
+        "Não deve ser confundido com o salário líquido (valor efetivamente recebido).",
+        "Em caso de remuneração variável, deve-se utilizar a média dos valores."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "Salário bruto é o mesmo que salário líquido?",
+          "answer": "Não. O salário bruto é a remuneração antes dos descontos. O salário líquido é o valor final recebido pelo empregado."
+        },
+        {
+          "doubt": "O vale-transporte integra o salário bruto?",
+          "answer": "Não, benefícios como o vale-transporte não integram o salário para fins de cálculos trabalhistas."
+        }
+      ]
+    },
+    "media-horas-extras": {
+      "title": "Média Mensal de Horas Extras",
+      "content": "<p>Para o cálculo de verbas como férias e 13º salário, é necessário apurar a <strong>média das horas extras</strong> realizadas habitualmente. O cálculo geralmente considera os últimos 12 meses.</p><p class='mt-3'><strong>Procedimento de cálculo:</strong></p><ol class='mt-1 list-decimal list-inside'><li>1. Somar o total de horas extras realizadas nos últimos 12 meses.</li><li>2. Dividir o total por 12 para obter a média mensal.</li><li>3. Utilizar essa média como base para os cálculos.</li></ol><p class='mt-3'><strong>Exemplo:</strong> Um total de 120 horas extras no ano resulta em uma média de 10 horas extras por mês.</p>",
+      "legal": "Súmula 347 TST - O cálculo das horas extras habituais repercute no cálculo do aviso prévio, seja ele indenizado ou trabalhado",
+      "quick_tips": [
+        "O período de referência para o cálculo da média é usualmente de 12 meses.",
+        "Devem ser incluídas tanto as horas extras de 50% quanto as de 100%.",
+        "Se não houve horas extras no período, o campo pode ser preenchido com zero.",
+        "Os contracheques são a fonte de informação para a apuração das horas."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "E se não realizei horas extras em todos os meses?",
+          "answer": "A média deve ser calculada mesmo assim, considerando os meses sem horas extras como zero."
+        },
+        {
+          "doubt": "As horas do banco de horas entram no cálculo?",
+          "answer": "Apenas as horas que foram efetivamente pagas como extras, e não compensadas, integram o cálculo."
+        }
+      ]
+    },
+    "data-admissao": {
+      "title": "Data de Admissão",
+      "content": "<p>A data de admissão é um dado essencial para o cálculo de <strong>tempo de serviço, períodos aquisitivos de férias e a proporcionalidade</strong> de diversas verbas trabalhistas.</p><p class='mt-3'><strong>Impactos da data de admissão:</strong></p><ul class='mt-2 space-y-1'><li>• <strong>Férias:</strong> Define o marco inicial para a contagem do período aquisitivo de 12 meses.</li><li>• <strong>13º salário:</strong> Determina o número de meses trabalhados no ano para o cálculo da proporcionalidade.</li><li>• <strong>Rescisão:</strong> É fundamental para calcular o aviso prévio proporcional e a multa do FGTS.</li></ul><p class='mt-3'>Recomenda-se o uso da data exata registrada na carteira de trabalho.</p>",
+      "legal": "Art. 29 da CLT - A carteira de trabalho será obrigatoriamente apresentada, contra recibo, pelo empregado ao empregador que o admitir",
+      "quick_tips": [
+        "A data correta deve ser conferida na carteira de trabalho assinada.",
+        "O formato a ser utilizado é dia/mês/ano (DD/MM/AAAA).",
+        "Uma data incorreta pode comprometer a precisão de todos os cálculos.",
+        "Em caso de dúvida, o departamento de RH da empresa deve ser consultado."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "E se a data de registro for posterior ao início do trabalho?",
+          "answer": "Deve-se utilizar a data do registro, mas o trabalhador pode ter direito ao reconhecimento do vínculo retroativo."
+        },
+        {
+          "doubt": "O contrato de experiência conta como data de admissão?",
+          "answer": "Sim, o contrato de experiência já configura um contrato de trabalho para todos os fins legais."
+        }
+      ]
+    },
+    "data-demissao": {
+      "title": "Data de Demissão",
+      "content": "<p>A data de demissão é o marco que determina <strong>prazos, proporcionalidades e os tipos de indenização</strong> a que o trabalhador tem direito.</p><p class='mt-3'><strong>Principais definições baseadas na data de demissão:</strong></p><ul class='mt-2 space-y-1'><li>• <strong>Aviso prévio:</strong> Define o período de 30 dias, acrescido de 3 dias por ano trabalhado.</li><li>• <strong>13º proporcional:</strong> Calcula o número de meses trabalhados no ano da rescisão.</li><li>• <strong>Férias proporcionais:</strong> Apura o valor referente ao período aquisitivo em curso.</li><li>• <strong>Multa do FGTS:</strong> Incide sobre o saldo em caso de demissão sem justa causa.</li></ul><p class='mt-3'>Deve-se utilizar a data formal da demissão, que pode não coincidir com o último dia trabalhado.</p>",
+      "legal": "Art. 487 da CLT - Não havendo prazo estipulado, a parte que, sem justo motivo, quiser rescindir o contrato deverá avisar a outra da sua resolução",
+      "quick_tips": [
+        "A data consta no Termo de Rescisão de Contrato de Trabalho (TRCT).",
+        "Pode ser diferente do último dia efetivamente trabalhado.",
+        "Em demissões sem justa causa, a projeção do aviso prévio integra o tempo de serviço.",
+        "É a data oficial para todos os efeitos legais da rescisão."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "A data de demissão é a mesma do último dia de trabalho?",
+          "answer": "Não necessariamente. Em casos de aviso prévio indenizado, as datas são distintas."
+        },
+        {
+          "doubt": "E em caso de pedido de demissão?",
+          "answer": "A data é a do desligamento, mas os direitos são diferentes (ex: sem multa de 40% do FGTS)."
+        }
+      ]
+    },
+    "desconto-vale-refeicao": {
+      "title": "Desconto Vale-Refeição/Alimentação",
+      "content": "<p>O empregador pode efetuar um desconto de até <strong>20% do salário base</strong> do empregado para custear o fornecimento de vale-refeição ou vale-alimentação.</p><p class='mt-3'>O desconto é limitado ao percentual estabelecido e deve ser calculado sobre o salário base, não sobre a remuneração bruta total.</p>",
+      "legal": "Art. 458 da CLT e Portaria 3 do Ministério do Trabalho - O desconto será de no máximo 20% do salário contratual",
+      "quick_tips": [
+        "O percentual máximo de desconto é de 20% do salário base.",
+        "O empregado pode optar por não receber o benefício.",
+        "O cálculo do desconto é feito sobre o salário base, não sobre o total bruto.",
+        "O valor do desconto deve ser discriminado no contracheque."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "O empregado pode ser obrigado a aceitar o benefício?",
+          "answer": "Não, o vale-refeição/alimentação é um benefício, e a adesão por parte do empregado é opcional."
+        },
+        {
+          "doubt": "O desconto é calculado sobre o salário bruto?",
+          "answer": "Não, o cálculo é efetuado com base no salário contratual (base)."
+        }
+      ]
+    },
+    "adiantamentos": {
+      "title": "Adiantamentos (Vales)",
+      "content": "<p>Adiantamentos são <strong>valores pagos antecipadamente</strong> pelo empregador ao empregado, que serão posteriormente deduzidos da remuneração ou das verbas rescisórias.</p><p class='mt-3'><strong>Tipos comuns de adiantamentos:</strong></p><ul class='mt-2 space-y-1'><li>• <strong>Adiantamento quinzenal:</strong> Pagamento de uma parcela do salário no meio do mês.</li><li>• <strong>Empréstimos consignados:</strong> Valores emprestados pela empresa com desconto em folha.</li><li>• <strong>Vales diversos:</strong> Antecipações para despesas específicas.</li><li>• <strong>Adiantamento do 13º salário:</strong> Pagamento antecipado da primeira parcela.</li></ul><p class='mt-3'>Na rescisão, todos os adiantamentos comprovados são descontados do acerto final.</p>",
+      "legal": "Art. 462 da CLT - Ao empregador é vedado efetuar qualquer desconto nos salários do empregado, salvo quando este resultar de adiantamentos",
+      "quick_tips": [
+        "É recomendável manter os comprovantes de todos os adiantamentos.",
+        "Apenas valores devidamente comprovados podem ser descontados.",
+        "O adiantamento quinzenal ('vale') é uma prática comum de mercado.",
+        "O detalhamento dos descontos deve constar no contracheque."
+      ],
+      "common_doubts": [
+        {
+          "doubt": "Posso me opor a um desconto de adiantamento?",
+          "answer": "Não, se o adiantamento foi de fato recebido e comprovado pela empresa."
+        },
+        {
+          "doubt": "E se o valor devido for maior que as verbas rescisórias?",
+          "answer": "A empresa pode buscar o ressarcimento da diferença, mas geralmente por meios judiciais, não por desconto direto."
+        }
+      ]
+    }
+  }
+}
