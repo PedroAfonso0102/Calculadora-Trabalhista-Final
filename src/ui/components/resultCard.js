@@ -69,6 +69,33 @@ function totalLine(label, value){
  * @param {FeriasResult} results - O objeto com os resultados do cálculo.
  * @returns {string} A string HTML do cartão de resultados de Férias.
  */
+function renderLegalNotices() {
+    return `
+        <ul class="text-[11px] text-muted-foreground space-y-1 mt-4">
+            <li>* Valores aproximados para orientação, não substitui assessoria jurídica.</li>
+            <li>* Consulta gratuita sem armazenamento de dados.</li>
+            <li>* Base legal: CLT e legislação trabalhista vigente.</li>
+        </ul>
+    `;
+}
+
+function renderFooter(existingFooter) {
+    const legalNotices = renderLegalNotices();
+    if (existingFooter) {
+        return `
+            <footer class="mt-4 pt-2 border-t border-dashed">
+                ${existingFooter}
+                ${legalNotices}
+            </footer>
+        `;
+    }
+    return `
+        <footer class="mt-4 pt-2 border-t border-dashed">
+            ${legalNotices}
+        </footer>
+    `;
+}
+
 export function renderFeriasResults(results) {
 	if (!results || Object.keys(results).length === 0) {
 		return `<div class="card-base p-4">
@@ -137,12 +164,14 @@ export function renderFeriasResults(results) {
 	}
 
 	const ano = (()=>{ try { return getAnoAtual(); } catch(_e){ return ''; } })();
+    const footerHTML = renderFooter('<p class="text-[11px] text-muted-foreground">* Bases segregadas: abono e 13º adiantado fora das incidências. [Modelo simplificado]</p>');
+
 	return `<div class="card-base p-4 space-y-3">
 		<h2 class="text-lg font-semibold mb-1 flex items-center gap-2">Resultados (Férias) ${ano?`<span class=\"text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/30\">${ano}</span>`:''}</h2>
 		<div class="space-y-3">${rowsHTML}</div>
 		${warningsHTML}
 		${breakdownHTML}
-		<p class="text-[11px] text-muted-foreground mt-3">* Bases segregadas: abono e 13º adiantado fora das incidências. [Modelo simplificado]</p>
+        ${footerHTML}
 	</div>`;
 }
 
@@ -213,6 +242,8 @@ export function renderDecimoTerceiroResults(results) {
 	}
 
 	const ano = (()=>{ try { return getAnoAtual(); } catch(_e){ return ''; } })();
+    const footerHTML = renderFooter('<p class="text-[11px] text-muted-foreground">* INSS/IRRF sobre a base proporcional integral. FGTS exibido apenas como referência.</p>');
+
 	return `<div class="card-base p-4 space-y-3">
 		<h2 class=\"text-lg font-semibold mb-1 flex items-center gap-2\">Resultados (13º) ${ano?`<span class=\\"text-[10px] px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/30\\">${ano}</span>`:''}</h2>
 		<div class=\"space-y-3\">
@@ -223,7 +254,7 @@ export function renderDecimoTerceiroResults(results) {
 		</div>
 		${warningsHTML}
 		${breakdownHTML}
-		<p class=\"text-[11px] text-muted-foreground mt-3\">* INSS/IRRF sobre a base proporcional integral. FGTS exibido apenas como referência.</p>
+        ${footerHTML}
 	</div>`;
 }
 
@@ -306,7 +337,7 @@ export function renderRescisaoResults(results) {
             <span class="totalizador valor-monetario">${formatCurrency(totalLiquido)}</span>
         </div>
         ${warningsHTML}
-        <p class="text-[11px] text-muted-foreground mt-3">* Valores estimados. Não substitui o Termo de Rescisão de Contrato de Trabalho (TRCT) oficial.</p>
+        ${renderFooter('<p class="text-[11px] text-muted-foreground">* Valores estimados. Não substitui o Termo de Rescisão de Contrato de Trabalho (TRCT) oficial.</p>')}
     </div>`;
 }
 
@@ -363,7 +394,7 @@ export function renderFGTSResults(r) {
                 <h3 class="text-md font-semibold mt-4 mb-2">Detalhes do Cálculo</h3>
                 <div class="space-y-1 text-sm">${rows}</div>
 
-                <p class="text-[11px] text-muted-foreground mt-4">* O cálculo de juros é uma estimativa baseada em dados históricos da TR. O valor real pode variar.</p>
+                ${renderFooter('<p class="text-[11px] text-muted-foreground mt-4">* O cálculo de juros é uma estimativa baseada em dados históricos da TR. O valor real pode variar.</p>')}
             </div>`;
 }
 
@@ -382,7 +413,7 @@ export function renderPISPASEPResults(r){
 		['Valor Integral', CurrencyFormatter.format(r.valorIntegral)],
 		['Valor Proporcional', CurrencyFormatter.format(r.valorProporcional)]
 	].map(x=>`<div class="row-pair"><span>${x[0]}</span><span class="valor-monetario">${x[1]}</span></div>`).join('');
-	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (PIS/PASEP)</h2><div class="space-y-1">${rows}</div>${totalLine('Valor Proporcional', CurrencyFormatter.format(r.valorProporcional))}</div>`;
+	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (PIS/PASEP)</h2><div class="space-y-1">${rows}</div>${totalLine('Valor Proporcional', CurrencyFormatter.format(r.valorProporcional))}${renderFooter()}</div>`;
 }
 
 /**
@@ -406,7 +437,7 @@ export function renderSeguroDesempregoResults(r){
                 <h2 class="text-lg font-semibold mb-3 flex items-center gap-2">${title}</h2>
                 <div class="space-y-1">${rows}</div>
                 ${totalLine('Total a Receber', CurrencyFormatter.format(r.valorTotal))}
-                <p class="text-[11px] text-muted-foreground mt-2">* O cálculo utiliza as regras e tabelas oficiais de 2025. O valor é uma estimativa.</p>
+                ${renderFooter('<p class="text-[11px] text-muted-foreground mt-2">* O cálculo utiliza as regras e tabelas oficiais de 2025. O valor é uma estimativa.</p>')}
             </div>`;
 }
 
@@ -424,7 +455,7 @@ export function renderHorasExtrasResults(r){
 		['Adicional (%)', r.adicionalPercent.toFixed(2)+'%'],
 		['Valor Horas Extras', CurrencyFormatter.format(r.valorHoras)]
 	].map(x=>`<div class="row-pair"><span>${x[0]}</span><span class="valor-monetario">${x[1]}</span></div>`).join('');
-	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (Horas Extras)</h2><div class="space-y-1">${rows}</div>${totalLine('Valor Extras', CurrencyFormatter.format(r.valorHoras))}</div>`;
+	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (Horas Extras)</h2><div class="space-y-1">${rows}</div>${totalLine('Valor Extras', CurrencyFormatter.format(r.valorHoras))}${renderFooter()}</div>`;
 }
 
 /**
@@ -435,7 +466,7 @@ export function renderHorasExtrasResults(r){
 export function renderINSSCalculatorResults(r){
 	if (!r || Object.keys(r).length===0) return genericEmpty('INSS');
 	const faixas = (r.faixas||[]).map(f=>`<tr><td class="pr-3">${f.faixa}</td><td class="pr-2">${(f.aliquota*100).toFixed(1)}%</td><td>${CurrencyFormatter.format(f.parcela)}</td></tr>`).join('');
-	return `<div class="card-base p-4 space-y-3"><h2 class="text-lg font-semibold mb-1">Resultados (INSS)</h2><div class="space-y-1"><div class="row-pair"><span>Salário</span><span class="valor-monetario">${CurrencyFormatter.format(r.salario)}</span></div><div class="row-pair"><span>Contribuição</span><span class="valor-monetario">${CurrencyFormatter.format(r.contribuicao)}</span></div>${totalLine('Total', CurrencyFormatter.format(r.contribuicao))}</div><details class="group"><summary class="cursor-pointer text-xs text-primary hover:underline">Detalhamento Faixas</summary><div class="mt-2 overflow-auto rounded border p-2 bg-subtle"><table class="text-[11px]"><thead><tr><th class="text-left pr-3">Faixa</th><th class="text-left pr-2">Alíq.</th><th class="text-left">Parcela</th></tr></thead><tbody>${faixas}</tbody></table></div></details></div>`;
+	return `<div class="card-base p-4 space-y-3"><h2 class="text-lg font-semibold mb-1">Resultados (INSS)</h2><div class="space-y-1"><div class="row-pair"><span>Salário</span><span class="valor-monetario">${CurrencyFormatter.format(r.salario)}</span></div><div class="row-pair"><span>Contribuição</span><span class="valor-monetario">${CurrencyFormatter.format(r.contribuicao)}</span></div>${totalLine('Total', CurrencyFormatter.format(r.contribuicao))}</div><details class="group"><summary class="cursor-pointer text-xs text-primary hover:underline">Detalhamento Faixas</summary><div class="mt-2 overflow-auto rounded border p-2 bg-subtle"><table class="text-[11px]"><thead><tr><th class="text-left pr-3">Faixa</th><th class="text-left pr-2">Alíq.</th><th class="text-left">Parcela</th></tr></thead><tbody>${faixas}</tbody></table></div></details>${renderFooter()}</div>`;
 }
 
 /**
@@ -454,7 +485,7 @@ export function renderValeTransporteResults(r){
 		['Desconto Empregado', CurrencyFormatter.format(r.descontoEmpregado)],
 		['Subsídeo Empresa', CurrencyFormatter.format(r.subsidioEmpresa)]
 	].map(x=>`<div class="row-pair"><span>${x[0]}</span><span class="valor-monetario">${x[1]}</span></div>`).join('');
-	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (Vale-Transporte)</h2><div class="space-y-1">${rows}</div>${totalLine('Custo Total', CurrencyFormatter.format(r.custoTotal))}</div>`;
+	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (Vale-Transporte)</h2><div class="space-y-1">${rows}</div>${totalLine('Custo Total', CurrencyFormatter.format(r.custoTotal))}${renderFooter()}</div>`;
 }
 
 /**
@@ -472,7 +503,7 @@ export function renderIRPFResults(r){
 		['Alíquota Efetiva', r.aliquotaEfetiva.toFixed(2)+'%']
 	].map(x=>`<div class="row-pair"><span>${x[0]}</span><span class="valor-monetario">${x[1]}</span></div>`).join('');
 	const faixa = r.faixa ? `<p class="text-[11px] mt-2">Faixa aplicada mensal: até ${r.faixa.limit===Infinity?'∞':CurrencyFormatter.format(r.faixa.limit)} | Alíquota ${(r.faixa.rate*100).toFixed(1)}% | Dedução ${CurrencyFormatter.format(r.faixa.deduction)} (escala anual simplificada)</p>`:'';
-	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (IRPF)</h2><div class="space-y-1">${rows}</div>${totalLine('Imposto Anual', CurrencyFormatter.format(r.impostoAnual))}${faixa}<p class="text-[11px] text-muted-foreground mt-2">Modelo estimativo. Não substitui cálculo oficial da DIRPF.</p></div>`;
+	return `<div class="card-base p-4"><h2 class="text-lg font-semibold mb-3">Resultados (IRPF)</h2><div class="space-y-1">${rows}</div>${totalLine('Imposto Anual', CurrencyFormatter.format(r.impostoAnual))}${faixa}${renderFooter('<p class="text-[11px] text-muted-foreground mt-2">Modelo estimativo. Não substitui cálculo oficial da DIRPF.</p>')}</div>`;
 }
 
 /**
@@ -508,7 +539,7 @@ export function renderSalarioLiquidoResults(r){
 	const inssTable = (r.inssBreakdown||[]).map(f=>`<tr><td class="pr-3">${f.faixa}</td><td class="pr-2">${(f.aliquota*100).toFixed(1)}%</td><td>${CurrencyFormatter.format(f.parcela)}</td></tr>`).join('');
 	const irrfFaixa = r.irrfFaixa ? `<p class="text-xs mt-2">Faixa IRRF: até ${r.irrfFaixa.limit===Infinity?'∞':CurrencyFormatter.format(r.irrfFaixa.limit)} | Alíquota ${(r.irrfFaixa.rate*100).toFixed(1)}% | Dedução ${CurrencyFormatter.format(r.irrfFaixa.deduction)}</p>` : '';
 	const breakdown = `<details class="mt-3 group"><summary class="cursor-pointer text-xs text-primary hover:underline">Ver detalhes de faixas</summary><div class="mt-2 rounded border p-2 bg-subtle overflow-auto"><h4 class="text-xs font-semibold mb-1">INSS</h4><table class="text-[11px]"><thead><tr><th class="text-left pr-3">Faixa</th><th class="text-left pr-2">Alíq.</th><th class="text-left">Parcela</th></tr></thead><tbody>${inssTable}</tbody></table>${irrfFaixa}<p class="text-[10px] mt-2 text-muted-foreground">Modelo mensal simplificado.</p></div></details>`;
-	return `<div class="card-base p-4 space-y-3"><h2 class="text-lg font-semibold mb-1">Resultados (Salário Líquido)</h2><div class="space-y-3"><div class="section-block space-y-1">${sec1.map(row).join('')}</div><div class="section-block space-y-1">${sec2.map(row).join('')}</div><div class="section-block space-y-1">${sec3.map(row).join('')}${totalLine('Salário Líquido', CurrencyFormatter.format(r.liquido))}</div></div>${breakdown}</div>`;
+	return `<div class="card-base p-4 space-y-3"><h2 class="text-lg font-semibold mb-1">Resultados (Salário Líquido)</h2><div class="space-y-3"><div class="section-block space-y-1">${sec1.map(row).join('')}</div><div class="section-block space-y-1">${sec2.map(row).join('')}</div><div class="section-block space-y-1">${sec3.map(row).join('')}${totalLine('Salário Líquido', CurrencyFormatter.format(r.liquido))}</div></div>${breakdown}${renderFooter()}</div>`;
 }
 
 // Nomes em PT-BR (mantendo compatibilidade)
